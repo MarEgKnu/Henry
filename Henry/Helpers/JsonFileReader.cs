@@ -6,10 +6,10 @@ namespace Henry.Helpers
     {
         public static List<T> ReadJson(string jsonFileName)
         {
-            using (var JsonFileReader = File.OpenText(jsonFileName))
+            using (var jsonFileReader = File.OpenText(jsonFileName))
             {
-                string inData = JsonFileReader.ReadToEnd();
-                return JsonSerializer.Deserialize<List<T>>(inData);
+                string inddata = jsonFileReader.ReadToEnd();
+                return JsonSerializer.Deserialize<List<T>>(inddata);
             }
         }
     }

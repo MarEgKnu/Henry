@@ -1,0 +1,29 @@
+[
+  {
+    "Id": 4,
+    "Name": "f",
+    "Description": "f",
+    "Img": null,
+    "Created": "2023-11-28T11:41:06.3811944+01:00",
+    "NeedsRepair": false,
+    "Type": 0
+  },
+  {
+    "Id": 6,
+    "Name": "f",
+    "Description": "f",
+    "Img": "ae7a817e-7ace-485d-80b2-eb3e42c3329d_ultraluxe.jpg",
+    "Created": "2023-11-28T12:44:48.3333996+01:00",
+    "NeedsRepair": false,
+    "Type": 0
+  },
+  {
+    "Id": 7,
+    "Name": "fee",
+    "Description": "fee",
+    "Img": null,
+    "Created": "2023-11-28T14:08:50.86355+01:00",
+    "NeedsRepair": false,
+    "Type": 1
+  }
+]

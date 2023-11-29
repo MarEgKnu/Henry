@@ -1,0 +1,44 @@
+﻿@page
+@using Henry.Interfaces
+@model Henry.Pages.Boats.IndexModel
+@inject IBoatRepository boatRepo;
+@{
+    ViewData["Title"] = "Bådsliste";
+}
+
+<h1>Bådsliste</h1>
+
+<p>
+    <a asp-page="CreateBoat">Opret en ny båd</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Beskrivelse</th>
+            <th>Oprettet</th>
+            <th>Bådtype</th>
+            <th>Har brug for reparationer</th>
+            <th>ID</th>
+            <th>Billede</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var boat in boatRepo.GetAllBoats() )
+        {
+            <tr>
+                <td>@boat.Name</td>
+                <td>@boat.Description</td>
+                <td>@boat.Created</td>
+                <td>@boat.Type</td>
+                <td>@(boat.NeedsRepair == false ? "Nej" : "Ja")</td>
+                <td>@boat.Id</td>
+                <td><img src="Imgs/BoatImgs/@boat.Img" width="80" height="80" /></td>
+                <td><a asp-page="EditBoat" asp-route-id="@boat.Id">Rediger</a></td>
+                <td><a asp-page="DeleteBoat" asp-route-id="@boat.Id">Slet</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>

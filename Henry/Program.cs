@@ -1,7 +1,12 @@
+using Henry.Interfaces;
+using Henry.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddTransient<IBoatRepository, BoatRepository>();   
 
 var app = builder.Build();
 

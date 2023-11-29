@@ -1,0 +1,17 @@
+﻿@page
+@model Henry.Pages.Events.DeleteEventModel
+@{
+    ViewData["Title"] = "Delete event";
+}
+
+<h1>Delete event</h1>
+<form method="post">
+    <div class="form-group">
+        <label>Event id</label> : @Model.DeleteEvent.Id <br />
+        <label>Event Name</label> : @Model.DeleteEvent.Name <br />
+        <label>Event Description</label> : @Model.DeleteEvent.Description <br />
+        <label>Event DateTime</label> : @Model.DeleteEvent.DateTime <br />
+
+        <input type="submit" asp-page-handler="Delete" asp-route-number="@Model.DeleteEvent.Id" value="Delete event" />
+    </div>
+</form>

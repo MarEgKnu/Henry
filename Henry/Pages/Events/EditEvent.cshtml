@@ -1,0 +1,30 @@
+﻿@page
+@model Henry.Pages.Events.EditEventModel
+@{
+    ViewData["Title"] = "Edit event";
+}
+
+<h1>Edit Event</h1>
+
+<form method="post">
+
+    <input type="hidden" asp-for="@Model.EventToUpdate.Id" />
+    <div class="form-group">
+        <label asp-for="@Model.EventToUpdate.Name" class="control-label"></label>
+        <input asp-for="@Model.EventToUpdate.Name" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.EventToUpdate.Description" class="control-label"></label>
+        <input asp-for="@Model.EventToUpdate.Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.EventToUpdate.DateTime" class="control-label"></label>
+        <input asp-for="@Model.EventToUpdate.DateTime" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Update a event" asp-page-handler="Update" class="btn btn-primary" />
+        <input type="submit" value="Delete a event" asp-page-handler="Delete" class="btn btn-primary" />
+    </div>
+</form>

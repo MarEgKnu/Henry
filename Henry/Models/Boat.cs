@@ -28,5 +28,15 @@ namespace Henry.Models
         [Display(Name = "Bådtype")]
         [Required(ErrorMessage = "Bådtype er krævet")]
         public BoatType? Type { get; set; }
+
+        public override string ToString()
+        {
+            return $"Navn: {Name}\n" +
+                   $"ID: {Id.ToString()}\n" +
+                   $"Beskrivelse: {Description}\n" +
+                   $"Oprettet: {Created}\n" +
+                   $"Har brug for reparationer?: {NeedsRepair}\n" +
+                   $"Bådtype: {Type}";
+        }
     }
 }

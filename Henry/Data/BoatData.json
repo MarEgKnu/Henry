@@ -3,7 +3,7 @@
     "Id": 4,
     "Name": "f",
     "Description": "f",
-    "Img": null,
+    "Img": "0e44bca5-c5c8-4dbb-a555-3f14a9bbaa95_PepperoniPizza.jpg",
     "Created": "2023-11-28T11:41:06.3811944+01:00",
     "NeedsRepair": false,
     "Type": 0
@@ -16,14 +16,5 @@
     "Created": "2023-11-28T12:44:48.3333996+01:00",
     "NeedsRepair": false,
     "Type": 0
-  },
-  {
-    "Id": 7,
-    "Name": "fee",
-    "Description": "fee",
-    "Img": null,
-    "Created": "2023-11-28T14:08:50.86355+01:00",
-    "NeedsRepair": false,
-    "Type": 1
   }
 ]

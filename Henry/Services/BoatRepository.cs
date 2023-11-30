@@ -101,7 +101,7 @@ namespace Henry.Services
         /// Returns the boat with an id matching the param. A empty boat object is returned if none is found
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>A boat object if found, or null if none found</returns>
+        /// <returns>A boat object if found, or empty boat obj if none found</returns>
         public Boat GetBoat(int id)
         {
             foreach (var boat in GetAllBoats())

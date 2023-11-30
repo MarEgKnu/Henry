@@ -32,6 +32,7 @@ namespace Henry.Pages.Boats
         public IActionResult OnGet(int id)
         {
             // Gets the boat, but if the radio button is clicked, it also runs OnGet, and overwrites over input back to defaults? how to fix this
+            // maybe get rid of the buttons to decide whether to edit photo or not, and just dont overwrite the photo is none is selected?
             Boat = _boatRepo.GetBoat(id);
             return Page();
         }
@@ -81,7 +82,7 @@ namespace Henry.Pages.Boats
             _boatRepo.UpdateBoat(Boat);
             return RedirectToPage("Index");
         }
-        public IActionResult OnPostRadio()
+        public IActionResult OnGetReg()
         {
             return Page();
         }

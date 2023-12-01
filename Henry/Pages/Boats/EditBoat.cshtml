@@ -1,0 +1,86 @@
+﻿@page "{id:int}"
+@using Henry.Models
+@model Henry.Pages.Boats.EditBoatModel
+@{
+    ViewData["Title"] = "Rediger båd";
+}
+
+<h1>Rediger Båd</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="@Model.Boat.Id" />
+            <div class="form-group">
+                <label asp-for="@Model.Boat.Name" class="control-label">Navn</label>
+                <input asp-for="@Model.Boat.Name" class="form-control" />
+                <span asp-validation-for="@Model.Boat.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Boat.Description" class="control-label">Beskrivelse</label>
+                <input asp-for="@Model.Boat.Description" class="form-control" />
+                <span asp-validation-for="@Model.Boat.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Boat.Type" class="control-label"></label>
+                <select required asp-for="@Model.Boat.Type" asp-items="Html.GetEnumSelectList<BoatType>()" class="form-control">
+                    <option>Vælg en bådtype</option>
+                </select>
+                <span asp-validation-for="@Model.Boat.Type" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="@Model.Boat.NeedsRepair" class="control-label">Har brug for reparationer?</label>
+                <label>
+                    <input type="radio" checked="checked" asp-for="@Model.Boat.NeedsRepair" , value="false" />Nej
+                </label>
+                <label>
+                    <input type="radio" asp-for="@Model.Boat.NeedsRepair" , value="true" />Ja
+                </label>
+                <span asp-validation-for="@Model.Boat.NeedsRepair" class="text-danger"></span>
+            </div>
+        @* </form> *@
+        @* <form method="post" asp-page-handler="Radio">
+            <div>
+                <label asp-for="@Model.ChangePhoto" class="control-label">Updater Billede?</label>
+                <label>
+                    <input type="radio" checked="checked" onclick="this.form.submit()" asp-for="@Model.ChangePhoto" , value="false" />Nej
+                </label>
+                <label>
+                    <input type="radio" onclick="this.form.submit()" asp-for="@Model.ChangePhoto" , value="true" />Ja
+                </label>
+            </div>
+        </form> *@
+        @* <form method="post" enctype="multipart/form-data"> *@
+            @{
+                if (Model.ChangePhoto == true)
+                {
+                    <div class="form-group">
+                        <label asp-for="@Model.Photo" class="control-label"></label>
+                        <div class="custom-file">
+                            <input asp-for="@Model.Photo" class="custom-file-input form-control" />
+                            <span asp-validation-for="@Model.Photo" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+            }
+            <div class="form-group">
+                <input type="submit" value="Updater båd" class="btn btn-primary" />
+            </div>
+        </form>
+        <form method="get">
+            <div>
+                <label asp-for="@Model.ChangePhoto" class="control-label">Updater Billede?</label>
+                <label>
+                    <input type="radio" onclick="this.form.submit()" asp-for="@Model.ChangePhoto" , value="false" />Nej
+                </label>
+                <label>
+                    <input type="radio" onclick="this.form.submit()" asp-for="@Model.ChangePhoto" , value="true" />Ja
+                </label>
+                <span asp-validation-for="@Model.ChangePhoto" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-page="Index">Tilbage</a>
+</div>

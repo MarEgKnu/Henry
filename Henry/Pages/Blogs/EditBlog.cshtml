@@ -1,0 +1,25 @@
+﻿@page
+@model Henry.Pages.Blogs.EditBlogModel
+@{
+    ViewData["Title"] = "Edit Blog"; 
+}
+
+<h1>Edit blog</h1>
+
+<form method="post">
+
+    <input type="hidden" asp-for="@Model.BlogToUpdate.Id" />
+    <div class="form-group">
+        <label asp-for="@Model.BlogToUpdate.Title" class="control-label"></label>
+        <input asp-for="@Model.BlogToUpdate.Title" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.BlogToUpdate.Content" class="control-label"></label>
+        <input asp-for="@Model.BlogToUpdate.Content" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Update a blog" asp-page-handler="Update" class="btn btn-primary" />
+        <input type="submit" value="Delete a blog" asp-page-handler="Delete" class="btn btn-primary" />
+    </div>
+</form>

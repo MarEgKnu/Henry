@@ -31,7 +31,7 @@
                 <td>@item.CreatorUserId</td>
                 <td>@item.Created</td>
                 <td>@item.LastUpdated</td>
-                <td><img src="~/Images/BlogImage/@item.Img" width="80" height="80" /></td>
+                <td><img src="~/Imgs/BlogImages/@item.Img" width="80" height="80" /></td>
                 <td><a asp-page="EditBlog" asp-route-id="@item.Id">Edit</a></td>
                 <td><a asp-page="DeleteBlog" asp-route-deleteId="@item.Id">Delete</a></td>
             </tr>

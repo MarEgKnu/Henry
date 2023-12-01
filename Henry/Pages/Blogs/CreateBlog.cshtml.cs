@@ -32,10 +32,10 @@ namespace Henry.Pages.Blogs
             {
                 if (NewBlog.Img != null)
                 {
-                    string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "/Images/BlogImages", NewBlog.Img);
+                    string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "/Imgs/BlogImages", NewBlog.Img);
                     System.IO.File.Delete(filePath);
                 }
-                NewBlog.Img = Helpers.FileHelpers.ProcessUploadedFile("/Images/BlogImages", Photo, _webHostEnvironment);
+                NewBlog.Img = Helpers.FileHelpers.ProcessUploadedFile("Imgs/BlogImages", Photo, _webHostEnvironment);
             }
             NewBlog.Created = DateTime.Now;
             NewBlog.LastUpdated = NewBlog.Created;

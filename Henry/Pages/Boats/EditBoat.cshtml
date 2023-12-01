@@ -69,6 +69,9 @@
         </form>
         <form method="get">
             <div>
+                <input type="submit" value="Reset Inputs" class="btn btn-secondary" />
+            </div>
+            <div>
                 <label asp-for="@Model.ChangePhoto" class="control-label">Updater Billede?</label>
                 <label>
                     <input type="radio" onclick="this.form.submit()" asp-for="@Model.ChangePhoto" , value="false" />Nej

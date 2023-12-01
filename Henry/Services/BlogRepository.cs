@@ -7,10 +7,22 @@ namespace Henry.Services
     public class BlogRepository : IBlogRepository
     {
         private string jsonFileName = @"Data\BlogData.json";
+
+        private IWebHostEnvironment _env;
+
+        public BlogRepository()
+        {
+        }
+
         /// <summary>
         /// Adds the given blog param to the repository, and gives it a new unique ID
         /// </summary>
         /// <param name="blog"></param>
+        /// 
+        public BlogRepository(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
         public void AddBlog(Blog blog)
         {
             List<int> BlogIds = new List<int>();
@@ -48,6 +60,18 @@ namespace Henry.Services
                 if (b.Id == blog.Id)
                 {
                     sucess = blogs.Remove(b);
+                    // deletes the img associated with the blog, if it was able to delete it and img isnt null
+                    if (b.Img != null && sucess)
+                    {
+                        string[] paths = { _env.WebRootPath, "Imgs", "BlogImages", b.Img };
+                        string path = Path.Combine(paths);
+                        // if the file exists delete it
+                        if (File.Exists(path))
+                        {
+                            File.Delete(path);
+                        }
+
+                    }
                     JsonFileWriter<Blog>.WriteToJson(blogs, jsonFileName);
                     return sucess;
                 }
@@ -94,6 +118,17 @@ namespace Henry.Services
                     if (blo.Id == blog.Id)
                     {
                         blo.Title = blog.Title;
+                        if (blo.Img != null && blo.Img != blog.Img)
+                        {
+                            string[] paths = { _env.WebRootPath, "Imgs", "BlogImgs", blo.Img };
+                            string path = Path.Combine(paths);
+                            // if the file exists delete it
+                            if (File.Exists(path))
+                            {
+                                File.Delete(path);
+                            }
+
+                        }
                         blo.Img = blog.Img;
                         blo.Content = blog.Content;
                         blo.LastUpdated = DateTime.Now;

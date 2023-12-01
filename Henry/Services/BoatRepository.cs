@@ -1,12 +1,27 @@
 ﻿using Henry.Helpers;
 using Henry.Interfaces;
 using Henry.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Henry.Services
 {
     public class BoatRepository : IBoatRepository
     {
         private string jsonFileName = @"Data\BoatData.json";
+
+        private IWebHostEnvironment _env;
+
+
+
+        public BoatRepository(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
+
+        public BoatRepository()
+        {
+        }
+
         /// <summary>
         /// Adds the given boat param to the repository, and gives it a new unique ID
         /// </summary>
@@ -48,6 +63,18 @@ namespace Henry.Services
                 if (b.Id == boat.Id)
                 {
                     sucess = boats.Remove(b);
+                    // deletes the img associated with the boat, if it was able to delete it and img isnt null
+                    if (b.Img != null && sucess)
+                    {
+                        string[] paths = { _env.WebRootPath, "Imgs", "BoatImgs", b.Img };
+                        string path = Path.Combine(paths);
+                        // if the file exists delete it
+                        if (File.Exists(path))
+                        {
+                            File.Delete(path);
+                        }
+
+                    }
                     JsonFileWriter<Boat>.WriteToJson(boats, jsonFileName);
                     return sucess;
                 }
@@ -83,6 +110,19 @@ namespace Henry.Services
                     {
                         bo.Description = boat.Description;
                         bo.Name = boat.Name;
+                        // if the current img isnt currently null, and the boats have diffrent imagnes, proceed
+                        
+                        if (bo.Img != null && bo.Img != boat.Img)
+                        {
+                            string[] paths = { _env.WebRootPath, "Imgs", "BoatImgs", bo.Img };
+                            string path = Path.Combine(paths);
+                            // if the file exists delete it
+                            if (File.Exists(path))
+                            {
+                                File.Delete(path);
+                            }
+                            
+                        }
                         bo.Img = boat.Img;
                         bo.NeedsRepair = boat.NeedsRepair;
                         bo.Type = boat.Type;

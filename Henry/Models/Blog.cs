@@ -15,5 +15,16 @@
         public DateTime Created {  get; set; }
 
         public DateTime LastUpdated { get; set; }
+
+
+        //public override string ToString()
+        //{
+        //    IMemberRepository memberRepo = new IMenuRepository();
+        //    return $"Titel: {Title}\n" +
+        //           $"Oprettet af: {memberRepo.GetMember(CreatorUserId)}\n" +
+        //           $"Oprettet: {Created}\n" +
+        //           $"Sidst opdateret: {LastUpdated}\n" +
+        //           $"ID: {Id}";
+        //}
     }
 }

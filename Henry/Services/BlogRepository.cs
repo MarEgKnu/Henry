@@ -63,7 +63,7 @@ namespace Henry.Services
                     // deletes the img associated with the blog, if it was able to delete it and img isnt null
                     if (b.Img != null && sucess)
                     {
-                        string[] paths = { _env.WebRootPath, "Imgs", "BlogImgs", b.Img };
+                        string[] paths = { _env.WebRootPath, "Imgs", "BlogImages", b.Img };
                         string path = Path.Combine(paths);
                         // if the file exists delete it
                         if (File.Exists(path))

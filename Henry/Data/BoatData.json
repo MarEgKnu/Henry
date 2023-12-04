@@ -1,11 +1,11 @@
 [
   {
     "Id": 1,
-    "Name": "ff",
-    "Description": "ff",
-    "Img": "7b12618a-4dc0-47b5-a9c2-f9f7af597790_KageBagning.jpg",
-    "Created": "2023-12-01T10:54:22.6713799+01:00",
+    "Name": "e",
+    "Description": "e",
+    "Img": "34aaf2fd-78c7-43ea-82ba-0b650fb859f3_wrestling.jpg",
+    "Created": "2023-12-01T11:36:15.3298272+01:00",
     "NeedsRepair": false,
-    "Type": 2
+    "Type": 0
   }
 ]

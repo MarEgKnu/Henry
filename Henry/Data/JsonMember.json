@@ -1,0 +1,17 @@
+﻿[
+  {
+    "UserId": 1,
+    "Name": "Ole Hansen",
+    "PhoneNumber": "12345678",
+    "Email": "ole@email.dk",
+    "Password": "1234"
+
+  },
+  {
+    "UserId": 2,
+    "Name": "Kirsten Jensen",
+    "PhoneNumber": "87654321",
+    "Email": "kirsten@email.dk",
+    "Password": "Password"
+  }
+]

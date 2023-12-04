@@ -1,0 +1,23 @@
+﻿@page "{id:int}"
+@model Henry.Pages.Boats.DeleteBoatModel
+@{
+    ViewData["Title"] = "Slet båd";
+}
+
+<h1>Er du sikker på, at du vil slette den følgende båd?:</h1>
+<div>
+    <p>Båd Navn: @Model.BoatToDelete.Name</p>
+    <p>Beskrivelse: @Model.BoatToDelete.Description</p>
+    <p>Oprettet: @Model.BoatToDelete.Created</p>
+    <p>Bådtype: @Model.BoatToDelete.Type</p>
+    <p>ID: @Model.BoatToDelete.Id</p>
+    <img src="/Imgs/BoatImgs/@Model.BoatToDelete.Img" width="120" height="120" />
+</div>
+<div>
+    <form method="post">
+        <input type="submit" asp-route-id="@Model.BoatToDelete.Id" value="Slet båd" class="btn btn-primary" />
+    </form>  
+    <a asp-page="Index">Tilbage</a>
+   
+    
+</div>

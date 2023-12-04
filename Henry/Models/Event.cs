@@ -8,6 +8,7 @@ namespace Henry.Models
         private string?  _name;
         private string? _description;
         private DateTime? _dateTime;
+        private string? _img;
 
         public int Id { get { return _id; }  set { _id = value; } }
         [Display(Name = "Event Name")]
@@ -17,6 +18,7 @@ namespace Henry.Models
         [Required(ErrorMessage = "Date is required")]
         [Range(typeof(DateTime), "28/11/2023", "12/11/2034")]
         public DateTime? DateTime { get { return _dateTime; }  set { _dateTime = value; } }
+        public string? Img { get { return _img; } set { _img = value; } }
 
         public Event()
         {

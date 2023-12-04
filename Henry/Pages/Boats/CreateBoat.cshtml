@@ -1,0 +1,56 @@
+﻿@page
+@using Henry.Models
+@model Henry.Pages.Boats.CreateBoatModel
+@{
+    ViewData["Title"] = "Opret båd";
+}
+
+<h1>Opret Båd</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="@Model.NewBoat.Name" class="control-label">Navn</label>
+        <input asp-for="@Model.NewBoat.Name" class="form-control" />
+        <span asp-validation-for="@Model.NewBoat.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.NewBoat.Description" class="control-label">Beskrivelse</label>
+        <input asp-for="@Model.NewBoat.Description" class="form-control" />
+        <span asp-validation-for="@Model.NewBoat.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.NewBoat.Type" class="control-label"></label>
+        <select required asp-for="@Model.NewBoat.Type" asp-items="Html.GetEnumSelectList<BoatType>()" class="form-control">
+            <option>Vælg en bådtype</option>
+        </select>
+        <span asp-validation-for="@Model.NewBoat.Type" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="@Model.NewBoat.NeedsRepair" class="control-label">Har brug for reparationer?</label>
+        <label>
+            <input type="radio" asp-for="@Model.NewBoat.NeedsRepair", value="false" />Nej
+        </label>
+        <label>
+            <input type="radio" asp-for="@Model.NewBoat.NeedsRepair" , value="true" />Ja
+        </label>
+        <span asp-validation-for="@Model.NewBoat.NeedsRepair" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Photo" class="control-label"></label>
+        <div class="custom-file">
+            <input asp-for="@Model.Photo" class="custom-file-input form-control" />
+            <span asp-validation-for="@Model.Photo" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Opret båd" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-page="Index">Tilbage</a>
+</div>
+

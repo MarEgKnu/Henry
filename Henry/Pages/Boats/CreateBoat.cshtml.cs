@@ -47,7 +47,6 @@ namespace Henry.Pages.Boats
                 }
 
                 NewBoat.Img = FileHelpers.ProcessUploadedFile("Imgs/BoatImgs", Photo, webHostEnvironment);
-
             }
             NewBoat.Created = DateTime.Now;
             _boatRepo.AddBoat(NewBoat);

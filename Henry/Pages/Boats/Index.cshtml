@@ -30,7 +30,7 @@
             <tr>
                 <td>@boat.Name</td>
                 <td>@boat.Description</td>
-                <td>@boat.Created</td>
+                <td>@boat.Created.ToShortDateString()</td>
                 <td>@boat.Type</td>
                 <td>@(boat.NeedsRepair == false ? "Nej" : "Ja")</td>
                 <td>@boat.Id</td>

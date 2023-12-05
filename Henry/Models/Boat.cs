@@ -21,7 +21,7 @@ namespace Henry.Models
 
         public string? Img { get; set; }
         [Display(Name = "Oprettet")]
-        public DateTime? Created {  get; set; }
+        public DateTime Created {  get; set; }
         [Display(Name = "Har brug for reperationer")]
         [Required(ErrorMessage = "Denne knap er krævet")]
         public bool? NeedsRepair { get; set; }  // to be implemented later

@@ -1,4 +1,5 @@
-﻿@page
+﻿@page "{Id:int}"
+@using Henry.Models
 @model Henry.Pages.Events.EditEventModel
 @{
     ViewData["Title"] = "Edit event";
@@ -6,7 +7,7 @@
 
 <h1>Rediger Event</h1>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 
     <input type="hidden" asp-for="@Model.EventToUpdate.Id" />
     <div class="form-group">
@@ -21,8 +22,14 @@
     <div class="form-group">
         <label asp-for="@Model.EventToUpdate.DateTime" class="control-label">Dato</label>
         <input asp-for="@Model.EventToUpdate.DateTime" class="form-control" />
-
-    </div>
+        <div class="form-group">
+            <label asp-for="@Model.Photo" class="control-label"></label>
+            <div class="custom-file">
+                <input asp-for="@Model.Photo" class="custom-file-input form-control" />
+                <span asp-validation-for="@Model.Photo" class="text-danger"></span>
+            </div>
+        </div>
+     </div>
     <div class="form-group">
         <input type="submit" value="Opdater event" asp-page-handler="Update" class="btn btn-primary" />
         <input type="submit" value="Slet event" asp-page-handler="Delete" class="btn btn-primary" />

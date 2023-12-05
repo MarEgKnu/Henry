@@ -1,17 +1,34 @@
-﻿[
+[
   {
     "UserId": 1,
     "Name": "Ole Hansen",
-    "PhoneNumber": "12345678",
+    "Phone": "12345678",
     "Email": "ole@email.dk",
-    "Password": "1234"
-
+    "Password": "1234",
+    "Pb": "Beard-sailor.jpg"
   },
   {
     "UserId": 2,
     "Name": "Kirsten Jensen",
-    "PhoneNumber": "87654321",
+    "Phone": "87654321",
     "Email": "kirsten@email.dk",
-    "Password": "Password"
+    "Password": "Password",
+    "Pb": "French-sailor.jpg"
+  },
+  {
+    "UserId": 3,
+    "Name": "Astarion Acunin",
+    "Phone": "80088008",
+    "Email": "smolboy@willsuckyourblood.com",
+    "Password": "Cazador",
+    "Pb": "astarion.jpg"
+  },
+  {
+    "UserId": 4,
+    "Name": "Halsin",
+    "Phone": "26632663",
+    "Email": "Honey@bear.Oak",
+    "Password": "OakFather",
+    "Pb": "Halsin.jpg"
   }
 ]

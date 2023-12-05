@@ -118,18 +118,18 @@ namespace Henry.Services
                     if (blo.Id == blog.Id)
                     {
                         blo.Title = blog.Title;
-                        if (blo.Img != null && blo.Img != blog.Img)
-                        {
-                            string[] paths = { _env.WebRootPath, "Imgs", "BlogImgs", blo.Img };
-                            string path = Path.Combine(paths);
-                            // if the file exists delete it
-                            if (File.Exists(path))
-                            {
-                                File.Delete(path);
-                            }
+                        //if (blo.Img != null && blo.Img != blog.Img)
+                        //{
+                        //    string[] paths = { _env.WebRootPath, "Imgs", "BlogImgs", blo.Img };
+                        //    string path = Path.Combine(paths);
+                        //    // if the file exists delete it
+                        //    if (File.Exists(path))
+                        //    {
+                        //        File.Delete(path);
+                        //    }
 
-                        }
-                        blo.Img = blog.Img;
+                        //}
+                        //blo.Img = blog.Img;
                         blo.Content = blog.Content;
                         blo.LastUpdated = DateTime.Now;
                         JsonFileWriter<Blog>.WriteToJson(blogs, jsonFileName);

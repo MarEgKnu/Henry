@@ -92,6 +92,18 @@ namespace Henry.Services
                         e.Name = ev.Name;
                         e.Description = ev.Description;
                         e.DateTime = ev.DateTime;
+                        if (e.Img != null && e.Img != ev.Img)
+                        {
+                            string[] paths = { _env.WebRootPath, "Imgs", "EventImages", e.Img };
+                            string path = Path.Combine(paths);
+                            // if the file exists delete it
+                            if (File.Exists(path))
+                            {
+                                File.Delete(path);
+                            }
+
+                        }
+                        e.Img = ev.Img;
                         break;
                     }
                 }

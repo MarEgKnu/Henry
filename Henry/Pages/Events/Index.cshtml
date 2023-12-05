@@ -3,19 +3,19 @@
 @{
 }
 
-<h1>List of events</h1>
+<h1>Liste af events</h1>
 
 <p>
-    <a asp-page="CreateEvent">Create a new event</a>
+    <a asp-page="CreateEvent">Opret event</a>
 </p>
 
 <table class="table">
     <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>DateTime</th>
+            <th>Navn</th>
+            <th>Beskrivelse</th>
+            <th>Dato</th>
             <th>Billede</th>
         </tr>
     </thead>
@@ -28,8 +28,8 @@
                 <td>@item.Description</td>
                 <td>@item.DateTime</td>
                 <td><img src="~/Imgs/EventImages/@item.Img" width="80" height="80" /></td>
-                <td><a asp-page="EditEvent" asp-route-id="@item.Id">Edit</a></td>
-                <td><a asp-page="DeleteEvent" asp-route-deleteId="@item.Id">Delete</a></td>
+                <td><a asp-page="EditEvent" asp-route-id="@item.Id">Opdater</a></td>
+                <td><a asp-page="DeleteEvent" asp-route-deleteId="@item.Id">Slet</a></td>
             </tr>
         }
     </tbody>

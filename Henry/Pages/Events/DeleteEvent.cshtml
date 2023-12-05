@@ -8,10 +8,10 @@
 <form method="post">
     <div class="form-group">
         <label>Event id</label> : @Model.DeleteEvent.Id <br />
-        <label>Event Name</label> : @Model.DeleteEvent.Name <br />
-        <label>Event Description</label> : @Model.DeleteEvent.Description <br />
-        <label>Event DateTime</label> : @Model.DeleteEvent.DateTime <br />
+        <label>Event Navn</label> : @Model.DeleteEvent.Name <br />
+        <label>Event Beskrivelse</label> : @Model.DeleteEvent.Description <br />
+        <label>Event Dato</label> : @Model.DeleteEvent.DateTime <br />
 
-        <input type="submit" asp-page-handler="Delete" asp-route-number="@Model.DeleteEvent.Id" value="Delete event" />
+        <input type="submit" asp-page-handler="Delete" asp-route-number="@Model.DeleteEvent.Id" value="Slet event" />
     </div>
 </form>

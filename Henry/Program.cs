@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<IEventRepository, EventRepository>();
-
-builder.Services.AddTransient<IBoatRepository, BoatRepository>();
+builder.Services.AddTransient<IMemberRepository, MemberRepository>();
+builder.Services.AddTransient<IBoatRepository, BoatRepository>();   
 builder.Services.AddTransient<IBlogRepository, BlogRepository>();
 
 

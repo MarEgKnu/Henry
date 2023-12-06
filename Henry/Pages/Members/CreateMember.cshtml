@@ -1,0 +1,43 @@
+﻿@page
+@model Henry.Pages.Members.CreateMemberModel
+@{
+    ViewData["Title"] = "Opret profil";
+}
+<form method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label asp-for="@Model.NewMember.Name" class="control-label"></label>
+        <input asp-for="@Model.NewMember.Name" class="form-control" />
+        <span asp-validation-for="@Model.NewMember.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.NewMember.Phone" class="control-label"></label>
+        <input asp-for="@Model.NewMember.Phone" class="form-control" />
+        <span asp-validation-for="@Model.NewMember.Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.NewMember.Email" class="control-label"></label>
+        <input asp-for="@Model.NewMember.Email" class="form-control" />
+        <span asp-validation-for="@Model.NewMember.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.NewMember.Password" class="control-label"></label>
+        <input asp-for="@Model.NewMember.Password" class="form-control" />
+        <span asp-validation-for="@Model.NewMember.Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Photo" class="control-label"></label>
+        <div class="custom-file">
+            <input asp-for="@Model.Photo" class="custom-file-input form-control" />
+            <label class="custom-file-label">Gem Billede</label>
+            <span asp-validation-for="@Model.Photo" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Opret Medlem" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-page="Index">Tilbage til oversigten</a>
+</div>

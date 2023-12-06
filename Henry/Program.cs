@@ -8,9 +8,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddTransient<IEventRepository, EventRepository>();
 builder.Services.AddTransient<IMemberRepository, MemberRepository>();
 builder.Services.AddTransient<IBoatRepository, BoatRepository>();   
-builder.Services.AddTransient<IEventRepository, EventRepository>();
-
-builder.Services.AddTransient<IBoatRepository, BoatRepository>();
 builder.Services.AddTransient<IBlogRepository, BlogRepository>();
 
 

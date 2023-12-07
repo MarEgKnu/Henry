@@ -81,5 +81,46 @@ namespace Henry.Services
                 JsonFileWriter<Member>.WriteToJson(members, JsonFileName);
             }
         }
+        public Member VerifyUser(string userName, string passWord)
+        {
+            foreach (var user in GetAllMembers())
+            {
+                if (userName == null || passWord == null)
+                {
+                    return null;
+                }
+                else if (userName.Equals(user.Name) && passWord.Equals(user.Password))
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
+        /// <summary>
+        /// Gets the currently logged in member, or null if not logged in or verification fails
+        /// </summary>
+        /// <param name="HttpContext"></param>
+        /// <returns>A member object</returns>
+        public Member GetLoggedInMember(HttpContext HttpContext)
+        {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return null;
+            }
+            Member user = GetMember((int)HttpContext.Session.GetInt32("UserId"));
+            if (user == null)
+            {
+                return null;
+            }
+            // verification
+            if (user.Password == HttpContext.Session.GetString("Password") && HttpContext.Session.GetString("Name") == user.Name)
+            {
+                return user;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

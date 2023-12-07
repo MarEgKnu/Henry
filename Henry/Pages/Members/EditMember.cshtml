@@ -1,0 +1,32 @@
+﻿@page
+@model Henry.Pages.Members.EditMemberModel
+@{
+    ViewData["Title"] = "Opdater profil";
+}
+<form method="post">
+
+    <input type="hidden" asp-for="@Model.MemberToUpdate.UserId" />
+    <div class="form-group">
+        <label asp-for="@Model.MemberToUpdate.Name" class="control-label"></label>
+        <input asp-for="@Model.MemberToUpdate.Name" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.MemberToUpdate.Phone" class="control-label"></label>
+        <input asp-for="@Model.MemberToUpdate.Phone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.MemberToUpdate.Email" class="control-label"></label>
+        <input asp-for="@Model.MemberToUpdate.Email" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.MemberToUpdate.Password" class="control-label"></label>
+        <input asp-for="@Model.MemberToUpdate.Password" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Opdater profil" asp-page-handler="Update" class="btn btn-primary" />
+        <input type="submit" value="Slet profil" asp-page-handler="Delete" class="btn btn-primary" />
+    </div>
+</form>

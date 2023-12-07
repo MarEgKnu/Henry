@@ -6,6 +6,12 @@ namespace Henry.Interfaces
     {
         List<Member> GetAllMembers();
 
-        Member GetMembers(int id);
+        Member GetMember(int id);
+        public void CreateMember(Member member);
+
+        public void UpdateMember(Member member);
+
+        public void DeleteMember(Member member);
+
     }
 }

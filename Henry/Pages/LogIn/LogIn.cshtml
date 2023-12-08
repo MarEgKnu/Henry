@@ -1,0 +1,26 @@
+﻿@page
+@model Henry.Pages.LogIn.LogInModel
+@{
+    ViewData["Title"] = "Log ind";
+}
+
+@Model.Message
+<form method="post">
+    <table>
+        <tr>
+            <td>Bruger</td>
+            <td><Input type="text" asp-for="@Model.Name" /></td>
+            <td><span asp-validation-for="@Model.Name" class="text-danger"></span></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><Input type="password" asp-for="@Model.Password" /></td>
+            <td><span asp-validation-for="@Model.Password" class="text-danger"></span></td>
+        </tr>
+        <tr>
+            <td>&nbsp</td>
+            <td><Input type="submit" value="Login" /></td>
+        </tr>
+    </table>
+
+</form>

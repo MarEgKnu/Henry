@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Henry.Interfaces;
+<!DOCTYPE html>
+@inject IMemberRepository memberRepo;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContext;
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,14 +38,37 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Blogs/Index">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Boats/Index">Både</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Events/Index">Event</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Members/Index">Medlemmer</a>
                         </li>
+                        @{
+                            if (memberRepo.GetLoggedInMember(Context) == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogIn">Log ind</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogOut">Log ud</a>
+                                </li>
+                            }
+                            if (memberRepo.GetLoggedInMember(Context) != null)
+                            {
+                                <li class="nav-item">
+                                    <p>Logget in som @memberRepo.GetLoggedInMember(Context).Name</p>
+                                </li>
+                            }
+                            else
+                            {
+                                
+                            }
+
+
+                        }
                     </ul>
                 </div>
             </div>

@@ -83,18 +83,39 @@ namespace Henry.Services
         }
         public Member VerifyUser(string userName, string passWord)
         {
+            if (userName == null || passWord == null)
+            {
+                return null;
+            }
             foreach (var user in GetAllMembers())
             {
-                if (userName == null || passWord == null)
-                {
-                    return null;
-                }
-                else if (userName.Equals(user.Name) && passWord.Equals(user.Password))
+               
+                if (userName.Equals(user.Name) && passWord.Equals(user.Password))
                 {
                     return user;
                 }
             }
             return null;
+        }
+        /// <summary>
+        /// Returns true or false if the current HttpContext is a valid Member ID, Name and Password combination
+        /// </summary>
+        /// <param name="HttpContext"></param>
+        /// <returns>Bool</returns>
+        public bool VerifySession(HttpContext HttpContext)
+        {
+            if (HttpContext.Session.GetString("Name") == null || HttpContext.Session.GetString("Password") == null || HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return false;
+            }
+            foreach (var user in GetAllMembers())
+            {
+                if (user.Name == HttpContext.Session.GetString("Name") && user.Password == HttpContext.Session.GetString("Password") && user.UserId == HttpContext.Session.GetInt32("UserId"))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         /// <summary>
         /// Gets the currently logged in member, or null if not logged in or verification fails
@@ -103,24 +124,13 @@ namespace Henry.Services
         /// <returns>A member object</returns>
         public Member GetLoggedInMember(HttpContext HttpContext)
         {
-            if (HttpContext.Session.GetInt32("UserId") == null)
+            // verification
+            if (!VerifySession(HttpContext))
             {
                 return null;
             }
             Member user = GetMember((int)HttpContext.Session.GetInt32("UserId"));
-            if (user == null)
-            {
-                return null;
-            }
-            // verification
-            if (user.Password == HttpContext.Session.GetString("Password") && HttpContext.Session.GetString("Name") == user.Name)
-            {
-                return user;
-            }
-            else
-            {
-                return null;
-            }
+            return user;
         }
     }
 }

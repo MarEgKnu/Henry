@@ -37,11 +37,11 @@
                     {
                         if (booking.BoatId == boat.Id)
                         {
-                            
+                            <td>@booking.BookingEnd</td>
+                            break;
                         }
                     }
                 }
-                <td>@boat.Name</td>
                 <td>@boat.Description</td>
                 <td>@boat.Created.ToShortDateString()</td>
                 <td>@boat.Type</td>

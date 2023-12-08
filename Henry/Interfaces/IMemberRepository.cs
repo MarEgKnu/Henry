@@ -16,6 +16,7 @@ namespace Henry.Interfaces
         public Member VerifyUser(string userName, string passWord);
 
         public Member GetLoggedInMember(HttpContext HttpContext);
+        bool VerifySession(HttpContext HttpContext);
 
     }
 }

@@ -1,0 +1,15 @@
+﻿@page "{id:int}"
+@model Henry.Pages.Boats.ShowBoatModel
+@{
+    ViewData["Title"] = "Vis båd";
+}
+
+<h1>Båd Navn: @Model.BoatToView.Name</h1>
+<div>
+    <p>Beskrivelse: @Model.BoatToView.Description</p>
+    <p>Oprettet: @Model.BoatToView.Created</p>
+    <p>Bådtype: @Model.BoatToView.Type</p>
+    <p>ID: @Model.BoatToView.Id</p>
+    <img src="/Imgs/BoatImgs/@Model.BoatToView.Img" width="120" height="120" />
+    <
+</div>

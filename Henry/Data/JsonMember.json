@@ -21,7 +21,8 @@
     "Phone": "80088008",
     "Email": "smolboy@willsuckyourblood.com",
     "Password": "Cazador",
-    "Pb": "astarion.jpg"
+    "Pb": "astarion.jpg",
+    "Memberstatus": true
   },
   {
     "UserId": 4,

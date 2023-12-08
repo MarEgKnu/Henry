@@ -2,6 +2,8 @@
 @using Henry.Interfaces
 @model Henry.Pages.Boats.IndexModel
 @inject IBoatRepository boatRepo;
+@inject IMemberRepository memberRepo;
+@inject IBookingRepository bookingRepo;
 @{
     ViewData["Title"] = "Bådsliste";
 }
@@ -16,6 +18,7 @@
     <thead>
         <tr>
             <th>Navn</th>
+            <th>Booket til</th>
             <th>Beskrivelse</th>
             <th>Oprettet</th>
             <th>Bådtype</th>
@@ -29,14 +32,34 @@
         {
             <tr>
                 <td>@boat.Name</td>
+                @{
+                    foreach (var booking in bookingRepo.GetAllBookings())
+                    {
+                        if (booking.BoatId == boat.Id)
+                        {
+                            
+                        }
+                    }
+                }
+                <td>@boat.Name</td>
                 <td>@boat.Description</td>
                 <td>@boat.Created.ToShortDateString()</td>
                 <td>@boat.Type</td>
                 <td>@(boat.NeedsRepair == false ? "Nej" : "Ja")</td>
                 <td>@boat.Id</td>
                 <td><img src="Imgs/BoatImgs/@boat.Img" width="80" height="80" /></td>
-                <td><a asp-page="EditBoat" asp-route-id="@boat.Id">Rediger</a></td>
-                <td><a asp-page="DeleteBoat" asp-route-id="@boat.Id">Slet</a></td>
+                @{
+                    if (memberRepo.VerifySession(HttpContext))
+                    {
+                        if (memberRepo.GetMember((int)HttpContext.Session.GetInt32("UserId")).Memberstatus)
+                        {
+                            <td><a asp-page="EditBoat" asp-route-id="@boat.Id">Rediger</a></td>
+                            <td><a asp-page="DeleteBoat" asp-route-id="@boat.Id">Slet</a></td>
+                        }
+                        
+                    }
+                }
+                <td><a asp-page="ShowBoat" asp-route-id="@boat.Id">Vis båd</a></td>
 
             </tr>
         }

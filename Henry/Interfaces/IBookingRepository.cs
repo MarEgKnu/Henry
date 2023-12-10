@@ -5,14 +5,21 @@ namespace Henry.Interfaces
     public interface IBookingRepository
     {
 
-        public void AddBooking(BoatBooking booking);
+        void AddBooking(BoatBooking booking);
 
-        public List<BoatBooking> GetAllBookings();
+        List<BoatBooking> GetAllBookings();
 
-        public bool UpdateBooking(BoatBooking booking);
+        bool UpdateBooking(BoatBooking booking);
 
-        public bool DeleteBooking(BoatBooking booking);
+        bool DeleteBooking(BoatBooking booking);
 
-        public BoatBooking GetBooking(int id);
+        BoatBooking GetBooking(int id);
+
+        List<BoatBooking> GetBookingsForBoat(int id);
+        bool HasAnyBookings(int id);
+
+        bool IsDateTimeBooked(DateTime time, int boatId);
+
     }
+
 }

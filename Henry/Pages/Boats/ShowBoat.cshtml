@@ -10,6 +10,9 @@
     <p>Oprettet: @Model.BoatToView.Created</p>
     <p>Bådtype: @Model.BoatToView.Type</p>
     <p>ID: @Model.BoatToView.Id</p>
-    <img src="/Imgs/BoatImgs/@Model.BoatToView.Img" width="120" height="120" />
-    <
+    <img src="/Imgs/BoatImgs/@Model.BoatToView.Img" width="120" height="120" /><br />
+    <a asp-page="BookBoat" asp-route-id="@Model.BoatToView.Id">Book båd</a>
+    <br />
+    <br />
+    <p>Du skal være logget ind, for at kunne booke en båd.</p>
 </div>

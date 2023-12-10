@@ -30,6 +30,10 @@ namespace Henry.Pages.LogIn
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             Member Member = _memberRepo.VerifyUser(Name, Password);
             if (Member == null)
             {

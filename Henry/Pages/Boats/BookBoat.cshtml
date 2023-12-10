@@ -1,0 +1,44 @@
+﻿@page "{id:int}"
+@using Henry.Interfaces;
+@model Henry.Pages.Boats.BookBoatModel
+@inject IBookingRepository bookingRepository;
+@inject IMemberRepository memberRepository;
+@{
+    ViewData["Title"] = "Book båd";
+}
+<form method="post">
+    <div class="form-group">
+        <label asp-for="@Model.Booking.BookingStart" class="control-label">Starttid</label>
+        <input asp-format="{0:dd-MM-yyyyTHH:mm}" asp-for="@Model.Booking.BookingStart" class="form-control" />
+        <span asp-validation-for="@Model.Booking.BookingStart" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Booking.BookingEnd" class="control-label">Sluttid</label>
+        <input asp-format="{0:dd-MM-yyyyTHH:mm}" asp-for="@Model.Booking.BookingEnd" class="form-control" />
+        <span asp-validation-for="@Model.Booking.BookingEnd" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Book båd" asp-route-id="@Model.BoatToBook.Id" class="btn btn-primary" />
+    </div>
+    <div>
+        <p class="text-danger">@Model.Message</p>
+    </div>
+    <div>
+        @{
+            if (!bookingRepository.HasAnyBookings(Model.BoatToBook.Id))
+            {
+                <p>Ingen Bookinger for denne båd</p>
+            }
+            else
+            {
+                foreach (var booking in bookingRepository.GetBookingsForBoat(Model.BoatToBook.Id))
+                {
+                    <p>Booket fra @(booking.BookingStart.ToString("g")) til @(booking.BookingEnd.ToString("g")) af @(memberRepository.GetMember(booking.UserId).Name) </p>
+
+                    <br />
+                }
+            }
+        }
+    </div>
+
+</form>>

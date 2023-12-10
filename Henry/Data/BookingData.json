@@ -1,3 +1,30 @@
 [
-
+  {
+    "BookingId": 1,
+    "UserId": 3,
+    "BoatId": 1,
+    "BookingStart": "2023-12-16T13:50:00",
+    "BookingEnd": "2023-12-24T13:50:00"
+  },
+  {
+    "BookingId": 2,
+    "UserId": 3,
+    "BoatId": 1,
+    "BookingStart": "2023-12-25T13:50:00",
+    "BookingEnd": "2023-12-29T13:50:00"
+  },
+  {
+    "BookingId": 3,
+    "UserId": 3,
+    "BoatId": 1,
+    "BookingStart": "2023-12-30T13:53:00",
+    "BookingEnd": "2023-12-29T13:53:00"
+  },
+  {
+    "BookingId": 4,
+    "UserId": 3,
+    "BoatId": 1,
+    "BookingStart": "2023-12-10T13:30:00",
+    "BookingEnd": "2023-12-10T13:32:00"
+  }
 ]

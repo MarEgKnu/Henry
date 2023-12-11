@@ -2,6 +2,7 @@ using Henry.Interfaces;
 using Henry.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Henry.Pages.LogIn
@@ -11,11 +12,12 @@ namespace Henry.Pages.LogIn
         private IMemberRepository _memberRepo;
 
         [BindProperty]
-        [Required]
+        [Required(ErrorMessage = "Angiv brugernavn"), DisplayName("Brugernavn")]
         public string Name { get; set; }
 
         [BindProperty]
-        [Required]
+        [Required(ErrorMessage = "Angiv kodeord"), DisplayName("Kodeord")]
+
         public string Password { get; set; }
 
         public string Message { get; set; }

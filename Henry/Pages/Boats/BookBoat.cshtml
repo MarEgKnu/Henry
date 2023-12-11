@@ -7,6 +7,11 @@
     ViewData["Title"] = "Book båd";
 }
 <form method="post">
+    <label asp-for="@Model.Booking.ExtraUsersIds" class="control-label">Vælg ekstra med på båden:</label>
+    <div>
+        <select asp-for="@Model.Booking.ExtraUsersIds" multiple="multiple" asp-items="@Model.Options">
+        </select>
+    </div>
     <div class="form-group">
         <label asp-for="@Model.Booking.BookingStart" class="control-label">Starttid</label>
         <input asp-format="{0:dd-MM-yyyyTHH:mm}" asp-for="@Model.Booking.BookingStart" class="form-control" />
@@ -33,7 +38,7 @@
             {
                 foreach (var booking in bookingRepository.GetBookingsForBoat(Model.BoatToBook.Id))
                 {
-                    <p>Booket fra @(booking.BookingStart.ToString("g")) til @(booking.BookingEnd.ToString("g")) af @(memberRepository.GetMember(booking.UserId).Name) </p>
+                    <p>Booket fra @(booking.BookingStart.ToString("g")) til @(booking.BookingEnd.ToString("g")) af @string.Join(",", booking.AllMemberNames) </p>
 
                     <br />
                 }

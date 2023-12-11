@@ -4,6 +4,7 @@ using Henry.Models;
 using Henry.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,6 +17,8 @@ namespace Henry.Pages.Boats
         private IBookingRepository _bookingRepository;
 
         public string Message { get; set; } = "";
+
+        public SelectList Options { get; set; }
 
         public Boat BoatToBook { get; set; }
         [BindProperty]
@@ -43,12 +46,32 @@ namespace Henry.Pages.Boats
             }
             else
             {
+                // creates a new member list and iterates over GetAllMembers, only adding each member to the list if it is NOT the currently logged in user
+                List<Member> members = new List<Member>();
+                foreach (var member in _memberRepository.GetAllMembers())
+                {
+                    if (!(member.UserId == HttpContext.Session.GetInt32("UserId")))
+                    {
+                        members.Add(member);
+                    }
+                }
+                Options = new SelectList(members, "UserId", "Name");
                 BoatToBook = _boatRepository.GetBoat(id);
                 return Page();
             }
         }
         public IActionResult OnPost(int id)
         {
+            // create selectlist again
+            List<Member> members = new List<Member>();
+            foreach (var member in _memberRepository.GetAllMembers())
+            {
+                if (!(member.UserId == HttpContext.Session.GetInt32("UserId")))
+                {
+                    members.Add(member);
+                }
+            }
+            Options = new SelectList(members, "UserId", "Name");
             BoatToBook = _boatRepository.GetBoat(id);
             if (!ModelState.IsValid)
             {

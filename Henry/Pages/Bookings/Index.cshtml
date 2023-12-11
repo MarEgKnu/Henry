@@ -1,4 +1,39 @@
 ﻿@page
+@using Henry.Interfaces;
 @model Henry.Pages.Bookings.IndexModel
+@inject IBookingRepository bookingRepo
+@inject IBoatRepository boatRepo
+@inject IMemberRepository memberRepo
 @{
+    ViewData["Title"] = "Bookings";
 }
+<table class="table">
+    <thead>
+        <tr>
+            <th>Båd</th>
+            <th>Starttid</th>
+            <th>Sluttid</th>
+            <th>Medlem</th>
+            <th>Medsejlende</th>
+            <th>ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in bookingRepo.GetAllBookings())
+        {
+            // only display the booking if the logged in user is part of it
+            if (booking.AllMemberIds.Contains((int)HttpContext.Session.GetInt32("UserId")))
+            {
+                <tr>
+                    <td>@boatRepo.GetBoat(booking.BoatId).Name</td>
+                    <td>@booking.BookingStart</td>
+                    <td>@booking.BookingEnd</td>
+                    <td>@memberRepo.GetMember(booking.UserId).Name</td>
+                    <td>@string.Join(",", booking.ExtraMemberNames)</td>
+                    <td>@booking.BookingId</td>
+                </tr>
+            }
+        }
+
+    <</tbody>
+<</table>>

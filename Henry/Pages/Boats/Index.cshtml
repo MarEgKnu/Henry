@@ -54,9 +54,8 @@
                         {
                             foreach (var booking in bookingRepo.GetBookingsForBoat(boat.Id))
                             {
-                                <p>Booket fra @booking.BookingStart.ToString("g") til @booking.BookingEnd.ToString("g") af @memberRepo.GetMember(booking.UserId).Name </p>
+                                <p>Booket fra @booking.BookingStart.ToString("g") til @booking.BookingEnd.ToString("g") af @string.Join(",", booking.AllMemberNames) </p>
 
-                                <br />
                             }
 
                         }    

@@ -20,7 +20,10 @@ namespace Henry.Models
             {
                 List<string> result = new List<string>();
                 IMemberRepository memberRepo = new MemberRepository();
-                result.Add(memberRepo.GetMember(UserId).Name);
+                if (memberRepo.GetMember(UserId) != null)
+                {
+                    result.Add(memberRepo.GetMember(UserId).Name);
+                }
                 if (ExtraUsersIds != null)
                 {
                     foreach (int id in ExtraUsersIds)

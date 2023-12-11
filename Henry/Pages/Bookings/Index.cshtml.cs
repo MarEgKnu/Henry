@@ -8,6 +8,9 @@ namespace Henry.Pages.Bookings
     {
         private IBookingRepository _bookingRepository;
         private IMemberRepository _memberRepository;
+
+        public bool AdminView { get; private set; }
+
         public IndexModel(IBookingRepository bookingRepository, IMemberRepository memberRepository)
         {
             _bookingRepository = bookingRepository;
@@ -22,6 +25,34 @@ namespace Henry.Pages.Bookings
             }
             else
             {
+                return Page();
+            }
+
+        }
+        public IActionResult OnGetAdmin()
+        {
+            // verify the user is logged in and an administrator
+            if (!_memberRepository.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
+            else
+            {
+                HttpContext.Session.SetInt32("AdminViewBookings", 1);
+                return Page();
+            }
+
+        }
+        public IActionResult OnGetRemoveAdmin()
+        {
+            // verify the user is logged in and an administrator
+            if (!_memberRepository.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
+            else
+            {
+                HttpContext.Session.Remove("AdminViewBookings");
                 return Page();
             }
 

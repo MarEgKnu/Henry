@@ -10,6 +10,7 @@ builder.Services.AddTransient<IMemberRepository, MemberRepository>();
 builder.Services.AddTransient<IBoatRepository, BoatRepository>();
 builder.Services.AddTransient<IBookingRepository, BookingRepository>();
 builder.Services.AddTransient<IBlogRepository, BlogRepository>();
+builder.Services.AddTransient<IUserEventRepository, UserEventRepository>();
 
 builder.Services.AddSession(); 
 builder.Services.AddHttpContextAccessor();

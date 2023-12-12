@@ -117,6 +117,31 @@ namespace Henry.Services
             }
             return false;
         }
+
+
+        /// <summary>
+        /// Returns true or false if the current HttpContext is a valid Member ID, Name and Password combination and has administator rights
+        /// </summary>
+        /// <param name="HttpContext"></param>
+        /// <returns>Bool</returns>
+        public bool VerifySessionAdmin(HttpContext HttpContext)
+        {
+            if (HttpContext.Session.GetString("Name") == null || HttpContext.Session.GetString("Password") == null || HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return false;
+            }
+            foreach (var user in GetAllMembers())
+            {
+                // now both checks if the user is valid, and if they are an admin
+                if (user.Name == HttpContext.Session.GetString("Name") && user.Password == HttpContext.Session.GetString("Password") && user.UserId == HttpContext.Session.GetInt32("UserId") && user.Memberstatus)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         /// <summary>
         /// Gets the currently logged in member, or null if not logged in or verification fails
         /// </summary>

@@ -108,5 +108,54 @@ namespace Henry.Services
                 return false;
             }
         }
+        /// <summary>
+        /// Returns a list of DateTime arrays containing the booking times for the inputted boatId
+        /// Index 0 in the array is start time, index 1 is end time
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A list of DateTime arrays</returns>
+        public List<BoatBooking> GetBookingsForBoat(int id)
+        {
+            List<BoatBooking> bookings = new List<BoatBooking>();
+            foreach (BoatBooking booking in GetAllBookings())
+            {
+                if (booking.BoatId == id)
+                {
+                    bookings.Add(booking);
+                }
+            }
+            // sort this properly so it lists the early bookings first
+            return bookings;
+        }
+        /// <summary>
+        /// Checks if the inputted boatId has any bookings attached to it
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>True if 1 or more bookings exist, false if not</returns>
+        public bool HasAnyBookings(int id)
+        {
+            foreach(BoatBooking booking in GetAllBookings())
+            {
+                if (booking.BoatId == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool IsDateTimeBooked(DateTime time, int boatId)
+        {
+            foreach(var booking in GetAllBookings())
+            {
+                if (booking.BoatId == boatId)
+                {
+                    if (time >= booking.BookingStart && time <= booking.BookingEnd)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

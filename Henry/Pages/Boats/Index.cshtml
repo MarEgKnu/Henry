@@ -10,15 +10,25 @@
 
 <h1>Bådsliste</h1>
 
-<p>
-    <a asp-page="CreateBoat">Opret en ny båd</a>
-</p>
+
+@{
+    // checks if the logged in user is verified, and is administrator
+    if (memberRepo.VerifySessionAdmin(HttpContext))
+    {
+        <p>
+            <a asp-page="CreateBoat">Opret en ny båd</a>
+        </p>
+
+    }
+}
+
+
 
 <table class="table">
     <thead>
         <tr>
             <th>Navn</th>
-            <th>Booket til</th>
+            <th>Bookinger</th>
             <th>Beskrivelse</th>
             <th>Oprettet</th>
             <th>Bådtype</th>
@@ -32,16 +42,25 @@
         {
             <tr>
                 <td>@boat.Name</td>
-                @{
-                    foreach (var booking in bookingRepo.GetAllBookings())
-                    {
-                        if (booking.BoatId == boat.Id)
+                <td>
+                    @{
+                        // checks if the boat has 1 or more bookings, and if it does display all the bookings
+
+                        if (!bookingRepo.HasAnyBookings(boat.Id))
                         {
-                            <td>@booking.BookingEnd</td>
-                            break;
+                            <p>Ingen bookinger</p>
                         }
-                    }
-                }
+                        else
+                        {
+                            foreach (var booking in bookingRepo.GetBookingsForBoat(boat.Id))
+                            {
+                                <p>Booket fra @booking.BookingStart.ToString("g") til @booking.BookingEnd.ToString("g") af @string.Join(",", booking.AllMemberNames) </p>
+
+                            }
+
+                        }    
+                 }
+                </td>
                 <td>@boat.Description</td>
                 <td>@boat.Created.ToShortDateString()</td>
                 <td>@boat.Type</td>
@@ -49,13 +68,11 @@
                 <td>@boat.Id</td>
                 <td><img src="Imgs/BoatImgs/@boat.Img" width="80" height="80" /></td>
                 @{
-                    if (memberRepo.VerifySession(HttpContext))
+                    // checks if the logged in user is verified, and is administrator
+                    if (memberRepo.VerifySessionAdmin(HttpContext))
                     {
-                        if (memberRepo.GetMember((int)HttpContext.Session.GetInt32("UserId")).Memberstatus)
-                        {
-                            <td><a asp-page="EditBoat" asp-route-id="@boat.Id">Rediger</a></td>
-                            <td><a asp-page="DeleteBoat" asp-route-id="@boat.Id">Slet</a></td>
-                        }
+                        <td><a asp-page="EditBoat" asp-route-id="@boat.Id">Rediger</a></td>
+                        <td><a asp-page="DeleteBoat" asp-route-id="@boat.Id">Slet</a></td>
                         
                     }
                 }

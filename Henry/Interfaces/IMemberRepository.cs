@@ -18,5 +18,7 @@ namespace Henry.Interfaces
         public Member GetLoggedInMember(HttpContext HttpContext);
         bool VerifySession(HttpContext HttpContext);
 
+        public bool VerifySessionAdmin(HttpContext HttpContext);
+
     }
 }

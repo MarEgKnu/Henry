@@ -11,5 +11,7 @@
         public DateTime UserEventStart { get; set; }
 
         public DateTime UserEventEnd { get; set; }
+
+        public bool Joined { get; set; }
     }
 }

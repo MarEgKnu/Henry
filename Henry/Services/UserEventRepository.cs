@@ -7,7 +7,7 @@ namespace Henry.Services
 {
     public class UserEventRepository : IUserEventRepository
     {
-        private string _jsonFileName = @"Data\JsonEvent.json";
+        private string _jsonFileName = @"Data\JsonUserEvent.json";
         public void AddUserEvent(UserEvent userEvent)
         {
             List<UserEvent> userEvents = GetAllUserEvents();

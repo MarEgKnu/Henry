@@ -1,17 +1,1 @@
-[
-  {
-    "BookingId": 1,
-    "UserId": 2,
-    "ExtraUsersIds": null,
-    "AllMemberNames": [
-      "Kirsten Jensen"
-    ],
-    "ExtraMemberNames": [],
-    "AllMemberIds": [
-      2
-    ],
-    "BoatId": 1,
-    "BookingStart": "2023-12-11T15:59:00",
-    "BookingEnd": "2023-12-12T14:59:00"
-  }
-]
+[]

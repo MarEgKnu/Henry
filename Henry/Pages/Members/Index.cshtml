@@ -1,0 +1,45 @@
+﻿@page
+@using Henry.Models;
+@model Henry.Pages.Members.IndexModel
+@{
+    ViewData["Title"] = "Medlemmer";
+}
+
+<h1> Liste over medlemmer</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Bruger Id</th>
+            <th>Navn</th>
+            <th>Telefonnummer</th>
+            <th>Mailadresse</th>
+            <th>Foto</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (Member M in Model.Members)
+            {
+                <tr>
+                <td>@M.UserId</td>
+                <td>@M.Name</td>
+                <td>@M.Phone</td>
+                <td>@M.Email</td>
+                <td><img src="/Imgs/MemberImages/@M.Pb" width="100" height="100"/></td>
+                <td><a asp-page="DeleteMember" asp-route-deleteUserId="@M.UserId">Slet medlem</a></td>
+                <td><a asp-page="EditMember" asp-route-deleteUserId="@M.UserId">Opdater medlem</a></td>
+            </tr>
+            }
+
+        </tbody>
+</table>
+<p>
+    <a asp-page="CreateMember">Opret medlem</a>
+</p>
+<p>
+    <a asp-page="DeleteMember">Slet et medlem</a>
+</p>
+<p>
+    <a asp-page="EditMember">Opdater et medlem</a>
+</p>
+

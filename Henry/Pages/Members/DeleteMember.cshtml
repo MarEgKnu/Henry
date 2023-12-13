@@ -1,0 +1,19 @@
+﻿@page
+@model Henry.Pages.Members.DeleteMemberModel
+@{
+    ViewData["Title"] = "Slet medlem";
+}
+<h1>Slet medlem</h1>
+<form method="post">
+    <div class="form-group">
+        <label>Medlems id</label> : @Model.DeleteMember.UserId <br />
+        <label>Navn</label> : @Model.DeleteMember.Name <br />
+        <label>Telefonnummer</label> : @Model.DeleteMember.Phone <br />
+        <label>Email</label> : @Model.DeleteMember.Email <br />
+        <label>Profilbillede</label> : @Model.DeleteMember.Pb <br />
+
+        <input type="submit" asp-page-handler="Delete" asp-route-deleteUserId="@Model.DeleteMember.UserId" class="btn btn-danger" value="Slet Medlem" />
+
+        <input type="submit" value="Cancel" class="btn btn-warning" asp-page-handler="Cancel" />
+    </div>
+</form>

@@ -26,16 +26,20 @@
                 <td>@item.Description</td>
                 <td>@item.DateTime</td>
                 <td><img src="~/Imgs/EventImages/@item.Img" width="80" height="80" /></td>
-@*                 <label class="switch">
-                    <input type="checkbox" asp-page-handler="Check">
+                <input asp-for="IsChecked">
+                <td><input name="Tilmeldning[@item.Members].Dispatched" value="true" /></td>
+@*                  <label class="switch">
+                    <input type="checkbox">
                     <span class="slider"></span> 
                 </label> *@
-                <td><input type="submit" asp-page-handler="On" asp-route-eventsId="@item.Id">On </td>
-                <td><input type="submit" asp-page-handler="Off" asp-route-eventsId="@item.Id">Off </td>
+                @* Lav isChecked og tilføj en knap i bunden som tilføjer alle isChecked *@
+@*                 <td><input type="submit" asp-page-handler="On" asp-route-eventsId="@item.Id">On </td>
+                <td><input type="submit" asp-page-handler="Off" asp-route-eventsId="@item.Id">Off </td> *@
             </tr>
         }
     </tbody>
 </table>
+
 
 
 @section Scripts

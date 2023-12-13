@@ -9,8 +9,6 @@ namespace Henry.Pages.Bookings
         private IBookingRepository _bookingRepository;
         private IMemberRepository _memberRepository;
 
-        public bool AdminView { get; private set; }
-
         public IndexModel(IBookingRepository bookingRepository, IMemberRepository memberRepository)
         {
             _bookingRepository = bookingRepository;

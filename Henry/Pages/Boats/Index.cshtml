@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @using Henry.Interfaces
 @model Henry.Pages.Boats.IndexModel
 @inject IBoatRepository boatRepo;
@@ -22,8 +22,21 @@
 
     }
 }
+    
+    @if (HttpContext.Session.GetInt32("ViewOnlyRepairBoats") == 1)
+    {
+        // display only if the user has already enabled it so they only see boats in need of repair
+        <form method="get">
+            <input type="submit" asp-page-handler="ShowAll" value="Vis alle både" class="btn btn-primary" />
+        </form>
+    }
+     else
+     {
+        <form method="get">
+            <input type="submit" asp-page-handler="ShowRepair" value="Vis kun både med reparationer" class="btn btn-primary" />
+        </form>
 
-
+     }
 
 <table class="table">
     <thead>
@@ -41,76 +54,81 @@
     <tbody>
         @foreach (var boat in boatRepo.GetAllBoats() )
         {
-            <tr>
-                <td>@boat.Name</td>
-                <td>
-                    @{
-                        // checks if the boat has 1 or more bookings, and if it does display all the bookings
+            // if the boat does not have any repairs, AND the user has the "viewonlyrepairboats" session var, display the boat
+            // alternatively, if the user hasent enabled "viewonlyrepairboats", display all regardless
+            if ((repairRepo.HasAnyRepairs(boat.Id) && HttpContext.Session.GetInt32("ViewOnlyRepairBoats") == 1) || HttpContext.Session.GetInt32("ViewOnlyRepairBoats") == null)
+            {              
+                <tr>
+                    <td>@boat.Name</td>
+                    <td>
+                        @{
+                            // checks if the boat has 1 or more bookings, and if it does display all the bookings
 
-                        if (!bookingRepo.HasAnyBookings(boat.Id))
-                        {
-                            <p>Ingen bookinger</p>
-                        }
-                        else
-                        {
-                            <ul>
-                            @foreach (var booking in bookingRepo.GetBookingsForBoat(boat.Id))
+                            if (!bookingRepo.HasAnyBookings(boat.Id))
                             {
-                                    <li>Booket fra @booking.BookingStart.ToString("g") til @booking.BookingEnd.ToString("g") af @string.Join(",", booking.AllMemberNames) </li>
-
+                                <p>Ingen bookinger</p>
                             }
-                            </ul>
-
-                        }    
-                 }
-                </td>
-                <td>@boat.Description</td>
-                <td>@boat.Created.ToShortDateString()</td>
-                <td>@boat.Type</td>
-                <td>
-                    @{
-                        // if the boat dosent have any repairs
-                        if (!repairRepo.HasAnyRepairs(boat.Id))
-                        {
-                            <p>Ingen reparationer</p>
-                        }
-                        else
-                        {
-                            // iterate through all repairs for this boat
-                            <ul>
-                            @foreach (var repair in repairRepo.GetRepairsForBoat(boat.Id))
+                            else
                             {
-                                <li>
-                                Reparations titel: <a asp-page="/Repairs/ShowRepair" asp-route-id="@repair.RepairId">@repair.Title</a><br>
-                                        Reparations beskrivelse: @repair.Description<br>
-                                @if (repair.Img != null)
+                                <ul>
+                                @foreach (var booking in bookingRepo.GetBookingsForBoat(boat.Id))
                                 {
+                                        <li>Booket fra @booking.BookingStart.ToString("g") til @booking.BookingEnd.ToString("g") af @string.Join(",", booking.AllMemberNames) </li>
 
-                                <p>Billede af skade:</p> <img src="Imgs/RepairImgs/@repair.Img" width="80" height="80">
-                                
                                 }
-                                </li>
+                                </ul>
+
+                            }    
+                     }
+                    </td>
+                    <td>@boat.Description</td>
+                    <td>@boat.Created.ToShortDateString()</td>
+                    <td>@boat.Type</td>
+                    <td>
+                        @{
+                            // if the boat dosent have any repairs
+                            if (!repairRepo.HasAnyRepairs(boat.Id))
+                            {
+                                <p>Ingen reparationer</p>
                             }
-                            </ul>
+                            else
+                            {
+                                // iterate through all repairs for this boat
+                                <ul>
+                                @foreach (var repair in repairRepo.GetRepairsForBoat(boat.Id))
+                                {
+                                    <li>
+                                    Reparations titel: <a asp-page="/Repairs/ShowRepair" asp-route-id="@repair.RepairId">@repair.Title</a><br>
+                                            Reparations beskrivelse: @repair.Description<br>
+                                    @if (repair.Img != null)
+                                    {
+
+                                    <p>Billede af skade:</p> <img src="/Imgs/RepairImgs/@repair.Img" width="80" height="80">
+                                
+                                    }
+                                    </li>
+                                }
+                                </ul>
+                            }
+                        }
+
+
+                    </td>
+                    <td>@boat.Id</td>
+                    <td><img src="/Imgs/BoatImgs/@boat.Img" width="80" height="80" /></td>
+                    @{
+                        // checks if the logged in user is verified, and is administrator
+                        if (memberRepo.VerifySessionAdmin(HttpContext))
+                        {
+                            <td><a asp-page="EditBoat" asp-route-id="@boat.Id">Rediger</a></td>
+                            <td><a asp-page="DeleteBoat" asp-route-id="@boat.Id">Slet</a></td>
+                        
                         }
                     }
+                    <td><a asp-page="ShowBoat" asp-route-id="@boat.Id">Vis båd</a></td>
 
-
-                </td>
-                <td>@boat.Id</td>
-                <td><img src="Imgs/BoatImgs/@boat.Img" width="80" height="80" /></td>
-                @{
-                    // checks if the logged in user is verified, and is administrator
-                    if (memberRepo.VerifySessionAdmin(HttpContext))
-                    {
-                        <td><a asp-page="EditBoat" asp-route-id="@boat.Id">Rediger</a></td>
-                        <td><a asp-page="DeleteBoat" asp-route-id="@boat.Id">Slet</a></td>
-                        
-                    }
-                }
-                <td><a asp-page="ShowBoat" asp-route-id="@boat.Id">Vis båd</a></td>
-
-            </tr>
+                </tr>
+            }
         }
     </tbody>
 </table>

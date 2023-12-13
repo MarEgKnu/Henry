@@ -11,7 +11,7 @@ namespace Henry.Pages.UserEvents
         private IUserEventRepository _userEventRepo;
         public List<Event> Events { get; private set; }
         public List<UserEvent> UserEvents { get; set; }
-        public bool IsChecked { get; set; }
+        public bool? IsChecked { get; set; }
 
         public IndexModel(IEventRepository eventRepository, IUserEventRepository userEventRepo)
         {
@@ -25,6 +25,7 @@ namespace Henry.Pages.UserEvents
         }
         public void OnPostCheck()
         {
+            UserEvents = IsChecked;
             //foreach (UserEvent userEvent in UserEvents)
             //{
             //    if (checked == true) {

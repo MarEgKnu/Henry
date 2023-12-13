@@ -5,41 +5,36 @@
 }
 
 <h1>Tilmeldning</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Navn</th>
-            <th>Beskrivelse</th>
-            <th>Dato</th>
-            <th>Billede</th>
-            <th>Tilmeld</th>
-        </tr>
-    </thead>
-    <tbody>
-        @* @foreach (var item in Model.Events) *@
-        @for (var i = 0; i < Model.Events.Count(); i++)
-        {
+<form method="post">
+    <table class="table">
+        <thead>
             <tr>
-                <td>@Model.Events[i].Id</td>
-                <td>@Model.Events[i].Name</td>
-                <td>@Model.Events[i].Description</td>
-                <td>@Model.Events[i].DateTime</td>
-                <td><img src="~/Imgs/EventImages/@Model.Events[i].Img" width="80" height="80" /></td>
-                <td><input asp-for="Events[i].Members" /></td>
-@*                 <label class="switch">
-                    <input type="checkbox" asp-page-handler="Check">
-                    <span class="slider"></span> 
-                </label> *@
-                @* Lav isChecked og tilføj en knap i bunden som tilføjer alle isChecked *@
-@*                 <td><input type="submit" asp-page-handler="On" asp-route-eventsId="@item.Id">On </td>
-                <td><input type="submit" asp-page-handler="Off" asp-route-eventsId="@item.Id">Off </td> *@
+                <th>ID</th>
+                <th>Navn</th>
+                <th>Beskrivelse</th>
+                <th>Dato</th>
+                <th>Billede</th>
+                <th>Tilmeld</th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @* @foreach (var item in Model.Events) *@
+            @for (var i = 0; i < Model.Events.Count(); i++)
+            {
+                <tr>
+                    <td>@Model.Events[i].Id</td>
+                    <td>@Model.Events[i].Name</td>
+                    <td>@Model.Events[i].Description</td>
+                    <td>@Model.Events[i].DateTime</td>
+                    <td><img src="~/Imgs/EventImages/@Model.Events[i].Img" width="80" height="80" /></td>
+                    @* <td><input asp-for="Events[i].Joined" /></td> *@
+                    <td><input name="IsChecked" type="checkbox" asp-for="@Model.Events[i].Joined" value="false" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button>Add events</button>
+</form>
 
 
 @section Scripts

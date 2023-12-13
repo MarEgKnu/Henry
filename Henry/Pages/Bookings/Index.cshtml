@@ -1,5 +1,6 @@
 ﻿@page "{handler?}"
 @using Henry.Interfaces;
+@using Henry.Models;
 @model Henry.Pages.Bookings.IndexModel
 @inject IBookingRepository bookingRepo
 @inject IBoatRepository boatRepo
@@ -7,7 +8,7 @@
 @{
     ViewData["Title"] = "Bookings";
 }
-
+<h1>Bookinger</h1>
 
 @{
     
@@ -40,13 +41,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var booking in bookingRepo.GetAllBookings())
+        @foreach (BoatBooking booking in bookingRepo.GetAllBookings())
         {
             // only display the booking if the logged in user is part of it, or display all if the user is in "Admin" mode
             if ((booking.AllMemberIds.Contains((int)HttpContext.Session.GetInt32("UserId")) || (HttpContext.Session.GetInt32("AdminViewBookings") == 1)))
             {
                 <tr>
-                    <td>@boatRepo.GetBoat(booking.BoatId).Name</td>
+                    <td><a asp-page="/Boats/ShowBoat" asp-route-id="@booking.BoatId">@boatRepo.GetBoat(booking.BoatId).Name</a></td>
                     <td>@booking.BookingStart</td>
                     <td>@booking.BookingEnd</td>
                     <td>@memberRepo.GetMember(booking.UserId).Name</td>

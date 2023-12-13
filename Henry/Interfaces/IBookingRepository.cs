@@ -18,7 +18,7 @@ namespace Henry.Interfaces
         List<BoatBooking> GetBookingsForBoat(int id);
         bool HasAnyBookings(int id);
 
-        bool IsDateTimeBooked(DateTime time, int boatId);
+        public bool IsDateTimeBooked(DateTime timeStart, DateTime timeEnd, int boatId);
 
     }
 

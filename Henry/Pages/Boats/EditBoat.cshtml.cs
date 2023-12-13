@@ -44,6 +44,11 @@ namespace Henry.Pages.Boats
         }
         public IActionResult OnPost()
         {
+            // checks the user is a verified administrator upon posting
+            if (!_memberRepo.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
             //if (Photo == null && ChangePhoto == true)
             //{
             //    ModelState.AddModelError("ChangePhoto", "Photo expected as ChangePhoto is true");
@@ -87,10 +92,6 @@ namespace Henry.Pages.Boats
             //}
             _boatRepo.UpdateBoat(Boat);
             return RedirectToPage("Index");
-        }
-        public IActionResult OnGetReg()
-        {
-            return Page();
         }
     }
 }

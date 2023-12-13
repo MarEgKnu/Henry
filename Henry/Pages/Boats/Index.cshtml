@@ -4,6 +4,7 @@
 @inject IBoatRepository boatRepo;
 @inject IMemberRepository memberRepo;
 @inject IBookingRepository bookingRepo;
+@inject IRepairRepository repairRepo;
 @{
     ViewData["Title"] = "Bådsliste";
 }
@@ -32,7 +33,7 @@
             <th>Beskrivelse</th>
             <th>Oprettet</th>
             <th>Bådtype</th>
-            <th>Har brug for reparationer</th>
+            <th>Reparationer</th>
             <th>ID</th>
             <th>Billede</th>
         </tr>
@@ -52,11 +53,13 @@
                         }
                         else
                         {
-                            foreach (var booking in bookingRepo.GetBookingsForBoat(boat.Id))
+                            <ul>
+                            @foreach (var booking in bookingRepo.GetBookingsForBoat(boat.Id))
                             {
-                                <p>Booket fra @booking.BookingStart.ToString("g") til @booking.BookingEnd.ToString("g") af @string.Join(",", booking.AllMemberNames) </p>
+                                    <li>Booket fra @booking.BookingStart.ToString("g") til @booking.BookingEnd.ToString("g") af @string.Join(",", booking.AllMemberNames) </li>
 
                             }
+                            </ul>
 
                         }    
                  }
@@ -64,7 +67,36 @@
                 <td>@boat.Description</td>
                 <td>@boat.Created.ToShortDateString()</td>
                 <td>@boat.Type</td>
-                <td>@(boat.NeedsRepair == false ? "Nej" : "Ja")</td>
+                <td>
+                    @{
+                        // if the boat dosent have any repairs
+                        if (!repairRepo.HasAnyRepairs(boat.Id))
+                        {
+                            <p>Ingen reparationer</p>
+                        }
+                        else
+                        {
+                            // iterate through all repairs for this boat
+                            <ul>
+                            @foreach (var repair in repairRepo.GetRepairsForBoat(boat.Id))
+                            {
+                                <li>
+                                Reparations titel: <a asp-page="/Repairs/ShowRepair" asp-route-id="@repair.RepairId">@repair.Title</a><br>
+                                        Reparations beskrivelse: @repair.Description<br>
+                                @if (repair.Img != null)
+                                {
+
+                                <p>Billede af skade:</p> <img src="Imgs/RepairImgs/@repair.Img" width="80" height="80">
+                                
+                                }
+                                </li>
+                            }
+                            </ul>
+                        }
+                    }
+
+
+                </td>
                 <td>@boat.Id</td>
                 <td><img src="Imgs/BoatImgs/@boat.Img" width="80" height="80" /></td>
                 @{

@@ -18,20 +18,22 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Events)
+        @* @foreach (var item in Model.Events) *@
+        @for (var i = 0; i < Model.Events.Count(); i++)
         {
             <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td>@item.DateTime</td>
-                <td><img src="~/Imgs/EventImages/@item.Img" width="80" height="80" /></td>
+                <td>@Model.Events[i].Id</td>
+                <td>@Model.Events[i].Name</td>
+                <td>@Model.Events[i].Description</td>
+                <td>@Model.Events[i].DateTime</td>
+                <td><img src="~/Imgs/EventImages/@Model.Events[i].Img" width="80" height="80" /></td>
+                <td><input asp-for="Events[i].Members" /></td>
 @*                 <label class="switch">
                     <input type="checkbox" asp-page-handler="Check">
                     <span class="slider"></span> 
                 </label> *@
-                <td><input type="submit" asp-page-handler="On" asp-route-eventsId="@item.Id">On </td>
-                <td><input type="submit" asp-page-handler="Off" asp-route-eventsId="@item.Id">Off </td>
+@*                 <td><input type="submit" asp-page-handler="On" asp-route-eventsId="@item.Id">On </td>
+                <td><input type="submit" asp-page-handler="Off" asp-route-eventsId="@item.Id">Off </td> *@
             </tr>
         }
     </tbody>

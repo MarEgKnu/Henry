@@ -161,7 +161,6 @@ namespace Henry.Services
 
         public bool IsDateTimeBooked(DateTime timeStart, DateTime timeEnd, int boatId)
         {
-            var timeDelta = timeEnd - timeStart;
             foreach (var booking in GetAllBookings())
             {
                 if (booking.BoatId == boatId)
@@ -183,10 +182,6 @@ namespace Henry.Services
                 }
             }
             return false;
-        }
-        private bool IsDateTimeBetweenOrSame(DateTime Start, DateTime End, DateTime input)
-        {
-            return (input >= Start && input <= End);
         }
     }
 }

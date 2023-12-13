@@ -11,6 +11,7 @@ namespace Henry.Pages.UserEvents
         private IUserEventRepository _userEventRepo;
         public List<Event> Events { get; private set; }
         public List<UserEvent> UserEvents { get; set; }
+        public bool IsChecked { get; set; }
 
         public IndexModel(IEventRepository eventRepository, IUserEventRepository userEventRepo)
         {

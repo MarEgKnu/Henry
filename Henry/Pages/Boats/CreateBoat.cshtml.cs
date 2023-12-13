@@ -12,7 +12,7 @@ namespace Henry.Pages.Boats
     public class CreateBoatModel : PageModel
     {
         private IBoatRepository _boatRepo;
-
+        private IMemberRepository _memberRepo;
         private IWebHostEnvironment webHostEnvironment;
         [BindProperty]
         public Boat NewBoat { get; set; }
@@ -22,15 +22,21 @@ namespace Henry.Pages.Boats
 
         //public SelectList Types { get; set; }
 
-        public CreateBoatModel(IBoatRepository boatRepo, IWebHostEnvironment webHost)
+        public CreateBoatModel(IBoatRepository boatRepo, IWebHostEnvironment webHost, IMemberRepository memberRepo)
         {
             _boatRepo = boatRepo;
             webHostEnvironment = webHost;
+            _memberRepo = memberRepo;
             //Types = new SelectList(BoatType, "Type", "Type");
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            // checks the user is a verified administrator upon entering
+            if (!_memberRepo.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
+            return Page();
         }
         public IActionResult OnPost() // bruges til at oprette/update/delete
         {
@@ -47,7 +53,6 @@ namespace Henry.Pages.Boats
                 }
 
                 NewBoat.Img = FileHelpers.ProcessUploadedFile("Imgs/BoatImgs", Photo, webHostEnvironment);
-
             }
             NewBoat.Created = DateTime.Now;
             _boatRepo.AddBoat(NewBoat);

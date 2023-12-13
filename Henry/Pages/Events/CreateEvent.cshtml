@@ -4,30 +4,37 @@
     ViewData["Title"] = "Create Event";
 }
 
-<h1>Create event</h1>
+<h1>Opret event</h1>
 
 <form method="post" enctype="multipart/form-data">
 
     <div class="form-group">
-        <label asp-for="@Model.NewEvent.Name" class="control-label"></label>
+        <label asp-for="@Model.NewEvent.Name" class="control-label">Navn</label>
         <input asp-for="@Model.NewEvent.Name" class="form-control" />
         <span asp-validation-for="NewEvent.Name" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="@Model.NewEvent.Description" class="control-label"></label>
+        <label asp-for="@Model.NewEvent.Description" class="control-label">Beskrivelse</label>
         <input asp-for="@Model.NewEvent.Description" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="@Model.NewEvent.DateTime" class="control-label"></label>
+        <label asp-for="@Model.NewEvent.DateTime" class="control-label">Dato</label>
         <input asp-for="@Model.NewEvent.DateTime" class="form-control" />
         <span asp-validation-for="NewEvent.DateTime" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="@Model.Photo" class="control-label">Billede</label>
+        <div class="custom-file">
+            <input asp-for="@Model.Photo" class="custom-file-input form-control" />
+            <span asp-validation-for="@Model.Photo" class="text-danger"></span>
+        </div>
+    </div>
 
     <div class="form-group">
-        <input type="submit" value="Create a event" class="btn btn-primary" />
+        <input type="submit" value="Opret event" class="btn btn-primary" />
     </div>
 </form>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Tilbages</a>
 </div>

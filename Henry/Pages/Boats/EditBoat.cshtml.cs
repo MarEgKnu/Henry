@@ -12,6 +12,7 @@ namespace Henry.Pages.Boats
     {
         private IBoatRepository _boatRepo;
         private IWebHostEnvironment _webHostEnvironment;
+        private IMemberRepository _memberRepo;
 
         [Required(ErrorMessage = "Billede påkrævet")]
         [BindProperty]
@@ -23,15 +24,21 @@ namespace Henry.Pages.Boats
         [Required(ErrorMessage = "Denne knap er påkrævet")]
         [BindProperty(SupportsGet = true)]
         public bool? ChangePhoto {  get; set; }
-        public EditBoatModel(IBoatRepository boatRepo, IWebHostEnvironment webHostEnvironment)
+        public EditBoatModel(IBoatRepository boatRepo, IWebHostEnvironment webHostEnvironment, IMemberRepository memberRepo)
         {
             _boatRepo = boatRepo;
             _webHostEnvironment = webHostEnvironment;
-
+            _memberRepo = memberRepo;
         }
         public IActionResult OnGet(int id)
         {
+            // checks the user is a verified administrator upon entering
+            if (!_memberRepo.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
             // Gets the boat, but if the radio button is clicked, it also runs OnGet, and overwrites over input back to defaults? how to fix this
+            // maybe get rid of the buttons to decide whether to edit photo or not, and just dont overwrite the photo is none is selected?
             Boat = _boatRepo.GetBoat(id);
             return Page();
         }
@@ -81,7 +88,7 @@ namespace Henry.Pages.Boats
             _boatRepo.UpdateBoat(Boat);
             return RedirectToPage("Index");
         }
-        public IActionResult OnPostRadio()
+        public IActionResult OnGetReg()
         {
             return Page();
         }

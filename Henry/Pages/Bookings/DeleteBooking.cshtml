@@ -1,0 +1,26 @@
+﻿@page "{id:int}"
+@using Henry.Interfaces;
+@inject IBoatRepository boatRepo
+@inject IMemberRepository memberRepo
+@model Henry.Pages.Bookings.DeleteBookingModel
+@{
+    ViewData["Title"] = "Slet Booking";
+}
+
+<h1>Er du sikker på, at du vil slette den følgende booking?:</h1>
+<div>
+    <p>Båd Navn: @boatRepo.GetBoat(Model.BookingToDelete.BoatId).Name</p>
+    <p>Starttid: @Model.BookingToDelete.BookingStart.ToString("g")</p>
+    <p>Sluttid: @Model.BookingToDelete.BookingEnd.ToString("g")</p>
+    <p>Medlem: @memberRepo.GetMember(Model.BookingToDelete.UserId).Name</p>
+    <p>Medsejlende: @string.Join(",", Model.BookingToDelete.ExtraMemberNames)</p>
+    <p>ID: @Model.BookingToDelete.BookingId</p>
+</div>
+<div>
+    <form method="post">
+        <input type="submit" asp-route-id="@Model.BookingToDelete.BookingId" value="Slet booking" class="btn btn-primary" />
+    </form>
+    <a asp-page="Index">Tilbage</a>
+
+
+</div>

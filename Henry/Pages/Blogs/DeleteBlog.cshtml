@@ -1,0 +1,16 @@
+﻿@page
+@model Henry.Pages.Blogs.DeleteBlogModel
+@{
+    ViewData["Title"] = "Delete blog"; 
+}
+
+<h1>Delete blog</h1>
+<form method="post">
+    <div class="form-group">
+        <label>Event id</label> : @Model.DeleteBlog.Id <br />
+        <label>Event Name</label> : @Model.DeleteBlog.Title <br />
+        <label>Event Description</label> : @Model.DeleteBlog.Content <br />
+
+        <input type="submit" asp-page-handler="Delete" asp-route-number="@Model.DeleteBlog.Id" value="Delete blog" />
+    </div>
+</form>

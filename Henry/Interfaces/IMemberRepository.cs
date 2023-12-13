@@ -13,5 +13,12 @@ namespace Henry.Interfaces
 
         public void DeleteMember(Member member);
 
+        public Member VerifyUser(string userName, string passWord);
+
+        public Member GetLoggedInMember(HttpContext HttpContext);
+        bool VerifySession(HttpContext HttpContext);
+
+        public bool VerifySessionAdmin(HttpContext HttpContext);
+
     }
 }

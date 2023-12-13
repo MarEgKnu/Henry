@@ -16,6 +16,6 @@ namespace Henry.Models
         public string Password { get; set; }
         [DisplayName("Profilbillede")]
         public string? Pb { get; set; }
-        private bool Memberstatus { get; set; }
+        public bool Memberstatus { get; set; }
     }
 }

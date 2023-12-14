@@ -124,7 +124,6 @@ namespace Henry.Services
                             
                         }
                         bo.Img = boat.Img;
-                        bo.NeedsRepair = boat.NeedsRepair;
                         bo.Type = boat.Type;
                         JsonFileWriter<Boat>.WriteToJson(boats, jsonFileName);
                         return true;

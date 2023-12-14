@@ -5,7 +5,14 @@
     "Description": "e",
     "Img": "34aaf2fd-78c7-43ea-82ba-0b650fb859f3_wrestling.jpg",
     "Created": "2023-12-01T11:36:15.3298272+01:00",
-    "NeedsRepair": false,
     "Type": 0
+  },
+  {
+    "Id": 2,
+    "Name": "SuperSea 4000",
+    "Description": "Ny Motorb\u00E5d fra 2020, pas godt p\u00E5 den er sgu hurtig. Kr\u00E6ver diesel for at sejle.",
+    "Img": "007cdae9-d6ac-4704-88c7-3d2adb91a993_wrestling.jpg",
+    "Created": "2023-12-12T18:33:58.3635768+01:00",
+    "Type": 2
   }
 ]

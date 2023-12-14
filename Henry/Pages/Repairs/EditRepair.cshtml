@@ -1,0 +1,42 @@
+﻿@page "{id:int}"
+@using Henry.Interfaces
+@inject IBoatRepository boatRepo;
+@inject IRepairRepository repairRepo;
+@inject IMemberRepository memberRepo;
+@model Henry.Pages.Repairs.EditRepairModel
+@{
+    ViewData["Title"] = "Rediger reparation";
+}
+
+<h1>Rediger reparation</h1>
+
+<form method="post" enctype="multipart/form-data">
+
+    <input type="hidden" asp-for="@Model.Repair.RepairId" />
+    <div class="form-group">
+        <label asp-for="@Model.Repair.Title" class="control-label">Reparations titel</label>
+        <input asp-for="@Model.Repair.Title" class="form-control" />
+        <span asp-validation-for="@Model.Repair.Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Repair.Description" class="control-label">Reparations beskrivelse</label>
+        <textarea asp-for="@Model.Repair.Description" class="form-control"></textarea>
+        <span asp-validation-for="@Model.Repair.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Photo" class="control-label">(Valgfrit) billede af reparationsskade</label>
+        <div class="custom-file">
+            <input asp-for="@Model.Photo" class="custom-file-input form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" asp-route-id="@Model.Repair.RepairId" value="Rediger reparation med nyt billede" class="btn btn-primary" />
+        <input type="submit" asp-page-handler="SamePicture" asp-route-id="@Model.Repair.RepairId" value="Rediger reparation uden at ændre billede" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-page="Index">Tilbage</a>
+</div>

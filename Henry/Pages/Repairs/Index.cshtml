@@ -1,0 +1,58 @@
+﻿@page
+@using Henry.Interfaces
+@inject IBoatRepository boatRepo;
+@inject IRepairRepository repairRepo;
+@inject IMemberRepository memberRepo;
+@model Henry.Pages.Repairs.IndexModel
+@{
+    ViewData["Title"] = "Reparationer";
+}
+<h1>Reparationer</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Båd</th>
+            <th>Oprettet af</th>
+            <th>Titel</th>
+            <th>Beskrivelse</th>
+            <th>Oprettet</th>
+            <th>Billede af skade</th>
+            <th>ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var repair in repairRepo.GetAllRepairs())
+        {
+            <tr>
+                <td><a asp-page="/Boats/ShowBoat" asp-route-id="@repair.BoatId">@repair.BoatName</a></td>
+                <!-- Add link to their profile later -->
+                <td>@repair.UserName</td> 
+                <td>@repair.Title</td>
+                <td>@repair.Description</td>
+                <td>@repair.Created.ToString("g")</td>
+                @if (repair.Img == null)
+                {
+                    <td>Intet billede</td>
+                }
+                else
+                {
+                    <td><img src="Imgs/RepairImgs/@repair.Img" width="80" height="80" /></td>
+                }
+                <td>@repair.RepairId</td>
+                <!-- Only show the delete button if the user is an administrator -->
+                @if (memberRepo.VerifySessionAdmin(HttpContext))
+                {
+                    <td><a asp-page="DeleteRepair" asp-route-id="@repair.RepairId">Fjern reparation</a></td>
+                }
+                <!-- Only show the delete button if the user is an administrator OR the user is the creator of the repair -->
+                @if (memberRepo.VerifySessionAdmin(HttpContext) || repair.UserId == HttpContext.Session.GetInt32("UserId"))
+                {
+                    <td><a asp-page="EditRepair" asp-route-id="@repair.RepairId">Rediger reparation</a></td>
+                }
+                <td><a asp-page="ShowRepair" asp-route-id="@repair.RepairId">Vis</a></td>
+
+            </tr>
+        }
+
+     </tbody>
+</table>

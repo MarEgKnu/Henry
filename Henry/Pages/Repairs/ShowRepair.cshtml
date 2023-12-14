@@ -1,0 +1,15 @@
+﻿@page "{id:int}"
+@model Henry.Pages.Repairs.ShowRepairModel
+@{
+    ViewData["Title"] = "Vis reparation";
+}
+
+<h1>Reparation:</h1>
+<div>
+    <p>Titel: @Model.Repair.Title</p>
+    <p>Oprettet: @Model.Repair.Created</p>
+    <p>Beskrivelse: @Model.Repair.Description</p>
+    <p>ID: @Model.Repair.RepairId</p>
+    <P>Billede:</p> <img src="/Imgs/RepairImgs/@Model.Repair.Img" width="160" height="160" /><br />
+    <a asp-page="Index">Tilbage</a>
+</div>

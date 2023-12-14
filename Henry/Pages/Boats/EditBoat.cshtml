@@ -27,17 +27,6 @@
                 </select>
                 <span asp-validation-for="@Model.Boat.Type" class="text-danger"></span>
             </div>
-
-            <div>
-                <label asp-for="@Model.Boat.NeedsRepair" class="control-label">Har brug for reparationer?</label>
-                <label>
-                    <input type="radio" checked="checked" asp-for="@Model.Boat.NeedsRepair" , value="false" />Nej
-                </label>
-                <label>
-                    <input type="radio" asp-for="@Model.Boat.NeedsRepair" , value="true" />Ja
-                </label>
-                <span asp-validation-for="@Model.Boat.NeedsRepair" class="text-danger"></span>
-            </div>
         @* </form> *@
         @* <form method="post" asp-page-handler="Radio">
             <div>

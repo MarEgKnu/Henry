@@ -26,18 +26,6 @@
         <span asp-validation-for="@Model.NewBoat.Type" class="text-danger"></span>
     </div>
 
-    <div>
-        <label asp-for="@Model.NewBoat.NeedsRepair" class="control-label">Har brug for reparationer?</label>
-        <label>
-            <input type="radio" asp-for="@Model.NewBoat.NeedsRepair", value="false" />Nej
-        </label>
-        <label>
-            <input type="radio" asp-for="@Model.NewBoat.NeedsRepair" , value="true" />Ja
-        </label>
-        <span asp-validation-for="@Model.NewBoat.NeedsRepair" class="text-danger"></span>
-    </div>
-
-
     <div class="form-group">
         <label asp-for="@Model.Photo" class="control-label"></label>
         <div class="custom-file">

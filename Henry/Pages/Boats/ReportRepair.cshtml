@@ -1,0 +1,37 @@
+﻿@page
+@model Henry.Pages.Boats.ReportRepairModel
+@{
+    ViewData["Title"] = "Meld reparation";
+}
+
+<h1>Opret reparation</h1>
+
+<form method="post" enctype="multipart/form-data">
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Repair.Title" class="control-label">Reparations titel</label>
+        <input asp-for="@Model.Repair.Title" class="form-control" />
+        <span asp-validation-for="@Model.Repair.Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Repair.Description" class="control-label">Reparations beskrivelse</label>
+        <textarea asp-for="@Model.Repair.Description" class="form-control"></textarea>
+        <span asp-validation-for="@Model.Repair.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Photo" class="control-label">(Valgfrit) billede af reparationsskade</label>
+        <div class="custom-file">
+            <input asp-for="@Model.Photo" class="custom-file-input form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" asp-route-id="@Model.BoatToRepair.Id" value="Opret reparation" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-page="Index">Tilbage</a>
+</div>

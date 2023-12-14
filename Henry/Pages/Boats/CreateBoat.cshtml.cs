@@ -40,6 +40,11 @@ namespace Henry.Pages.Boats
         }
         public IActionResult OnPost() // bruges til at oprette/update/delete
         {
+            // checks the user is a verified administrator upon posting
+            if (!_memberRepo.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
             if (!ModelState.IsValid)
             {
                 return Page();

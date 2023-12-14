@@ -30,6 +30,11 @@ namespace Henry.Pages.Boats
         }
         public IActionResult OnPost(int id)
         {
+            // checks the user is a verified administrator upon posting
+            if (!_memberRepo.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
             _boatRepo.DeleteBoat(_boatRepo.GetBoat(id));
             return RedirectToPage("Index");
         }

@@ -4,10 +4,10 @@
 @inject IMemberRepository memberRepo
 @model Henry.Pages.Bookings.DeleteBookingModel
 @{
-    ViewData["Title"] = "Slet Booking";
+    ViewData["Title"] = "Check ud af Booking";
 }
 
-<h1>Er du sikker på, at du vil slette den følgende booking?:</h1>
+<h1>Er du sikker på, at du vil checke ud af bookingen?:</h1>
 <div>
     <p>Båd Navn: @boatRepo.GetBoat(Model.BookingToDelete.BoatId).Name</p>
     <p>Starttid: @Model.BookingToDelete.BookingStart.ToString("g")</p>
@@ -18,7 +18,7 @@
 </div>
 <div>
     <form method="post">
-        <input type="submit" asp-route-id="@Model.BookingToDelete.BookingId" value="Slet booking" class="btn btn-primary" />
+        <input type="submit" asp-route-id="@Model.BookingToDelete.BookingId" value="check-ud" class="btn btn-primary" />
     </form>
     <a asp-page="Index">Tilbage</a>
 

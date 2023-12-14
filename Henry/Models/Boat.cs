@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Henry.Interfaces;
+using Henry.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace Henry.Models
 {
@@ -25,6 +27,25 @@ namespace Henry.Models
         [Display(Name = "Bådtype")]
         [Required(ErrorMessage = "Bådtype er krævet")]
         public BoatType? Type { get; set; }
+
+        public bool IsAvailable 
+        { 
+            get
+            {
+                IBookingRepository bookingRepository = new BookingRepository();
+                foreach (var booking in bookingRepository.GetAllBookings())
+                {
+                    if (booking.BoatId == Id)
+                    {
+                        if (booking.BookingStart <= DateTime.Now && booking.BookingEnd >= DateTime.Now)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            } 
+        }
 
         public override string ToString()
         {

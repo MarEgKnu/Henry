@@ -2,11 +2,13 @@
 using Henry.Interfaces;
 using Henry.Models;
 using Microsoft.AspNetCore.Identity;
+using Henry.Services;
 
 namespace Henry.Services
 {
     public class UserEventRepository : IUserEventRepository
     {
+        private MemberRepository _memberRepository { get; set; }
         private string _jsonFileName = @"Data\JsonUserEvent.json";
         public void AddUserEvent(UserEvent userEvent)
         {

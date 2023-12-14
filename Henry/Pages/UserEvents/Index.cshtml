@@ -1,7 +1,9 @@
 ﻿@page
 @model Henry.Pages.UserEvents.IndexModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContext;
+@inject Interfaces.IMemberRepository memberRepo;
 @{
-    ViewData["Title"] = "Tildmeldning";
+    ViewData["Title"] = "Tilmeldning";
 }
 
 <h1>Tilmeldning</h1>
@@ -27,8 +29,13 @@
                     <td>@Model.Events[i].Description</td>
                     <td>@Model.Events[i].DateTime</td>
                     <td><img src="~/Imgs/EventImages/@Model.Events[i].Img" width="80" height="80" /></td>
-                    @* <td><input asp-for="Events[i].Joined" /></td> *@
-                    <td><input name="IsChecked" type="checkbox" asp-for="@Model.Events[i].Joined" value="false" /></td>
+                    <td><input name="IsChecked" type="checkbox" asp-for="@Model.UserEvents[i].Joined" /></td>
+                    @* <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.DateTime</td>
+                    <td><img src="~/Imgs/EventImages/@item.Img" width="80" height="80" /></td>
+                    <td><input name="IsChecked" type="checkbox" asp-for="@item.Joined" /></td> *@
                 </tr>
             }
         </tbody>

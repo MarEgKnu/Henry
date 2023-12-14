@@ -1,5 +1,6 @@
 using Henry.Interfaces;
 using Henry.Models;
+using Henry.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,9 +10,12 @@ namespace Henry.Pages.UserEvents
     {
         private IEventRepository _eventRepo;
         private IUserEventRepository _userEventRepo;
+        public IMemberRepository MemberRepository { get; set; }
         public List<Event> Events { get; private set; }
         public List<UserEvent> UserEvents { get; set; }
+        [BindProperty]
         public bool? IsChecked { get; set; }
+        public UserEvent UserEvent { get; set; }
 
         public IndexModel(IEventRepository eventRepository, IUserEventRepository userEventRepo)
         {
@@ -21,17 +25,12 @@ namespace Henry.Pages.UserEvents
         public void OnGet()
         {
             Events = _eventRepo.GetEvents();
-            //UserEvents = _userEventRepo.GetAllUserEvents();
         }
-        public void OnPostCheck()
+        public void OnPost()
         {
-            UserEvents = IsChecked;
-            //foreach (UserEvent userEvent in UserEvents)
-            //{
-            //    if (checked == true) {
-            //        userEvent.Joined = true;
-            //    }
-            //}
+            //UserEvents.Joined
+            UserEvent.EventId = MemberRepository.GetLoggedInMember(HttpContext).UserId;
+            _userEventRepo.AddUserEvent(UserEvent);
         }
     }
 }

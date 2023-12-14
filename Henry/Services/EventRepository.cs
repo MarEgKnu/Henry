@@ -36,6 +36,7 @@ namespace Henry.Services
                     break;
                 }
             }
+            ev.Joined = false;
             events.Add(ev);
             JsonFileWriter<Event>.WriteToJson(events, _jsonFileName);
         }

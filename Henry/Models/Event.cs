@@ -19,7 +19,7 @@ namespace Henry.Models
         public DateTime? DateTime { get { return _dateTime; }  set { _dateTime = value; } }
         public string? Img { get { return _img; } set { _img = value; } }
         public List<Member>? Members { get; set; }
-        public bool? Joined { get; set; }
+        public bool Joined { get; set; }
 
         public Event()
         {

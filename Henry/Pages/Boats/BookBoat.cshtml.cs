@@ -78,7 +78,7 @@ namespace Henry.Pages.Boats
                 return Page();
             }
             // if part of the booking date is already booked by someone else
-            else if (_bookingRepository.IsDateTimeBooked(Booking.BookingStart, id) || _bookingRepository.IsDateTimeBooked(Booking.BookingEnd, id))
+            else if (_bookingRepository.IsDateTimeBooked(Booking.BookingStart, Booking.BookingEnd ,id))
             {
                 Message = "En del af denne tidsperiode er allerede booket af nogle andre";
                 return Page();
@@ -99,7 +99,7 @@ namespace Henry.Pages.Boats
                 Booking.BoatId = id;
                 Booking.UserId = (int)HttpContext.Session.GetInt32("UserId");
                 _bookingRepository.AddBooking(Booking);
-                return Page();
+                return RedirectToPage("/Bookings/Index");
             }
         }
     }

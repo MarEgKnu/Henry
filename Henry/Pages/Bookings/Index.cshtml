@@ -53,10 +53,9 @@
                     <td>@memberRepo.GetMember(booking.UserId).Name</td>
                     <td>@string.Join(",", booking.ExtraMemberNames)</td>
                     <td>@booking.BookingId</td>
-                    <td><a asp-page="DeleteBooking" asp-route-id="@booking.BookingId">Slet</a></td>
+                    <td><a asp-page="DeleteBooking" asp-route-id="@booking.BookingId">Check-ud</a></td>
                 </tr>
             }
         }
-
-    <</tbody>
-<</table>>
+    </tbody>
+</table>

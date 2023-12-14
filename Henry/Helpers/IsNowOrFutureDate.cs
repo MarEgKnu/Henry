@@ -6,7 +6,7 @@ namespace Henry.Helpers
     {
         public override bool IsValid(object? value)
         {
-            return value != null && (DateTime)value >= DateTime.Now;
+            return value != null && (DateTime)value > DateTime.Now;
         }
     }
 }

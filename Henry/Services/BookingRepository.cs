@@ -1,6 +1,7 @@
 ﻿using Henry.Helpers;
 using Henry.Interfaces;
 using Henry.Models;
+using System.Runtime.CompilerServices;
 
 namespace Henry.Services
 {
@@ -109,11 +110,11 @@ namespace Henry.Services
             }
         }
         /// <summary>
-        /// Returns a list of DateTime arrays containing the booking times for the inputted boatId
-        /// Index 0 in the array is start time, index 1 is end time
+        /// Returns a list of BoatBookings for the inputted boatId
+        /// 
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>A list of DateTime arrays</returns>
+        /// <returns>A list of BoatBooking objects</returns>
         public List<BoatBooking> GetBookingsForBoat(int id)
         {
             List<BoatBooking> bookings = new List<BoatBooking>();
@@ -123,7 +124,7 @@ namespace Henry.Services
                 {
                     bookings.Add(booking);
                 }
-            }
+            }   
             // sort this properly so it lists the early bookings first
             return bookings;
         }
@@ -143,13 +144,38 @@ namespace Henry.Services
             }
             return false;
         }
-        public bool IsDateTimeBooked(DateTime time, int boatId)
+        //public bool IsDateTimeBooked(DateTime time, int boatId)
+        //{
+        //    foreach(var booking in GetAllBookings())
+        //    {
+        //        if (booking.BoatId == boatId)
+        //        {
+        //            if (time >= booking.BookingStart && time <= booking.BookingEnd)
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    return false;
+        //}
+
+        public bool IsDateTimeBooked(DateTime timeStart, DateTime timeEnd, int boatId)
         {
-            foreach(var booking in GetAllBookings())
+            foreach (var booking in GetAllBookings())
             {
                 if (booking.BoatId == boatId)
                 {
-                    if (time >= booking.BookingStart && time <= booking.BookingEnd)
+                    // if the inputted startTime is bigger than the BookingStart, aswell as smaller than the bookingEnd
+                    if (timeStart >= booking.BookingStart && timeStart <= booking.BookingEnd)
+                    {
+                        return true;
+                    }
+                    // if the inputted endTime is bigger than the BookingStart, aswell as smaller than the bookingEnd
+                    else if (timeEnd >= booking.BookingStart && timeEnd <= booking.BookingEnd)
+                    {
+                        return true;
+                    }
+                    else if (timeStart <= booking.BookingStart && timeEnd >= booking.BookingEnd)
                     {
                         return true;
                     }

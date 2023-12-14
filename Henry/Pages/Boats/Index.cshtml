@@ -1,9 +1,10 @@
-﻿@page
+﻿@page "{handler?}"
 @using Henry.Interfaces
 @model Henry.Pages.Boats.IndexModel
 @inject IBoatRepository boatRepo;
 @inject IMemberRepository memberRepo;
 @inject IBookingRepository bookingRepo;
+@inject IRepairRepository repairRepo;
 @{
     ViewData["Title"] = "Bådsliste";
 }
@@ -21,18 +22,73 @@
 
     }
 }
+<a asp-page="BoatsOutSailing" style="float:right">Se både ude og sejle</a>
 
+@if (HttpContext.Session.GetInt32("ViewOnlyAvailable") == 1)
+{
+    // display only if the user has already enabled it so they only see boats that are available
+    <form method="get">
+        <input type="submit" asp-page-handler="ShowBoth" value="Vis også utilgængelige både" class="btn btn-primary" />
+        <input type="hidden" asp-for="@Model.Date" />
+    </form>
+}
+else
+{
+    <form method="get">
+        <input type="submit" asp-page-handler="ShowAvailable" value="Vis kun tilgængelige både fra dato plus antal timer" class="btn btn-primary" />
+        <div class="form-group">
+            <label asp-for="@Model.Date" class="control-label">Booking tidspunkt</label>
+            <input asp-format="{0:dd-MM-yyyyTHH:mm}" asp-for="@Model.Date" class="form-control" />
+            <span asp-validation-for="@Model.Date" class="text-danger"></span>
+        </div>
+        
+        <select asp-for="Hours">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+    </form>
 
+}
+    
+    @if (HttpContext.Session.GetInt32("ViewOnlyRepairBoats") == 1)
+    {
+        // display only if the user has already enabled it so they only see boats in need of repair
+        <form method="get">
+            <input type="submit" asp-page-handler="ShowAll" value="Vis også både uden reparationer" class="btn btn-primary" />
+        <input type="hidden" asp-for="@Model.Date" />
+        </form>
+    }
+    else
+    {
+        <form method="get">
+            <input type="submit" asp-page-handler="ShowRepair" value="Vis kun både med reparationer" class="btn btn-primary" />
+        <input type="hidden" asp-for="@Model.Date" />
+        </form>
+
+    }
+    @if (Model.Date == DateTime.MinValue)
+    {
+        // if the Date variable isnt set (ie MinValue), set it to DateTime.Now
+        Model.Date = DateTime.Now;
+    }
 
 <table class="table">
     <thead>
         <tr>
             <th>Navn</th>
-            <th>Bookinger</th>
+            <th>Status</th>
             <th>Beskrivelse</th>
             <th>Oprettet</th>
             <th>Bådtype</th>
-            <th>Har brug for reparationer</th>
+            <th>Reparationer</th>
             <th>ID</th>
             <th>Billede</th>
         </tr>
@@ -40,45 +96,73 @@
     <tbody>
         @foreach (var boat in boatRepo.GetAllBoats() )
         {
-            <tr>
-                <td>@boat.Name</td>
-                <td>
-                    @{
-                        // checks if the boat has 1 or more bookings, and if it does display all the bookings
-
-                        if (!bookingRepo.HasAnyBookings(boat.Id))
+            // if the boat does not have any repairs, AND the user has the "viewonlyrepairboats" session var, display the boat
+            // alternatively, if the user hasent enabled "viewonlyrepairboats", display all regardless
+            if (Model.DisplayBoat("ViewOnlyRepairBoats", "ViewOnlyAvailable", boat, Model.Hours, Model.Date))
+            {
+                
+                <tr>
+                    <td>@boat.Name</td>
+                    <td>
+                        @if (bookingRepo.IsDateTimeBooked(Model.Date, Model.Date.AddHours(Model.Hours), boat.Id))
                         {
-                            <p>Ingen bookinger</p>
+                            string booked = (Model.Hours == 0) ? $"Ikke tilgængelig den {Model.Date.ToString("g")}" : $"Ikke tilgængelig fra {Model.Date.ToString("g")} til {Model.Date.AddHours(Model.Hours).ToString("g")}";
+                                            <p>@booked</p>
                         }
                         else
                         {
-                            foreach (var booking in bookingRepo.GetBookingsForBoat(boat.Id))
+                            string booked = (Model.Hours == 0) ? $"Tilgængelig den {Model.Date.ToString("g")}" : $"Tilgængelig fra {Model.Date.ToString("g")} til {Model.Date.AddHours(Model.Hours).ToString("g")}";
+                            <p>@booked</p>
+                        }
+                    </td>
+                    <td>@boat.Description</td>
+                    <td>@boat.Created.ToShortDateString()</td>
+                    <td>@boat.Type</td>
+                    <td>
+                        @{
+                            // if the boat dosent have any repairs
+                            if (!repairRepo.HasAnyRepairs(boat.Id))
                             {
-                                <p>Booket fra @booking.BookingStart.ToString("g") til @booking.BookingEnd.ToString("g") af @string.Join(",", booking.AllMemberNames) </p>
-
+                                <p>Ingen reparationer</p>
                             }
+                            else
+                            {
+                                // iterate through all repairs for this boat
+                                <ul>
+                                @foreach (var repair in repairRepo.GetRepairsForBoat(boat.Id))
+                                {
+                                    <li>
+                                    Reparations titel: <a asp-page="/Repairs/ShowRepair" asp-route-id="@repair.RepairId">@repair.Title</a><br>
+                                            Reparations beskrivelse: @repair.Description<br>
+                                    @if (repair.Img != null)
+                                    {
 
-                        }    
-                 }
-                </td>
-                <td>@boat.Description</td>
-                <td>@boat.Created.ToShortDateString()</td>
-                <td>@boat.Type</td>
-                <td>@(boat.NeedsRepair == false ? "Nej" : "Ja")</td>
-                <td>@boat.Id</td>
-                <td><img src="Imgs/BoatImgs/@boat.Img" width="80" height="80" /></td>
-                @{
-                    // checks if the logged in user is verified, and is administrator
-                    if (memberRepo.VerifySessionAdmin(HttpContext))
-                    {
-                        <td><a asp-page="EditBoat" asp-route-id="@boat.Id">Rediger</a></td>
-                        <td><a asp-page="DeleteBoat" asp-route-id="@boat.Id">Slet</a></td>
+                                    <p>Billede af skade:</p> <img src="/Imgs/RepairImgs/@repair.Img" width="80" height="80">
+                                
+                                    }
+                                    </li>
+                                }
+                                </ul>
+                            }
+                        }
+
+
+                    </td>
+                    <td>@boat.Id</td>
+                    <td><img src="/Imgs/BoatImgs/@boat.Img" width="80" height="80" /></td>
+                    @{
+                        // checks if the logged in user is verified, and is administrator
+                        if (memberRepo.VerifySessionAdmin(HttpContext))
+                        {
+                            <td><a asp-page="EditBoat" asp-route-id="@boat.Id">Rediger</a></td>
+                            <td><a asp-page="DeleteBoat" asp-route-id="@boat.Id">Slet</a></td>
                         
+                        }
                     }
-                }
-                <td><a asp-page="ShowBoat" asp-route-id="@boat.Id">Vis båd</a></td>
+                    <td><a asp-page="ShowBoat" asp-route-id="@boat.Id">Vis båd</a></td>
 
-            </tr>
+                </tr>
+            }
         }
     </tbody>
 </table>

@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "BookingId": 2,
+    "UserId": 3,
+    "ExtraUsersIds": null,
+    "AllMemberNames": [
+      "Astarion Acunin"
+    ],
+    "ExtraMemberNames": [],
+    "AllMemberIds": [
+      3
+    ],
+    "BoatId": 1,
+    "BookingStart": "2023-12-14T13:40:00",
+    "BookingEnd": "2023-12-16T13:37:00"
+  }
+]

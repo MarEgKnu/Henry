@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Henry.Interfaces;
+using Henry.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace Henry.Models
 {
@@ -6,7 +8,7 @@ namespace Henry.Models
     {
         Jolle,
         Sejlskib,
-        motorbåd
+        Motorbåd
     }
     public class Boat
     {
@@ -22,12 +24,46 @@ namespace Henry.Models
         public string? Img { get; set; }
         [Display(Name = "Oprettet")]
         public DateTime Created {  get; set; }
-        [Display(Name = "Har brug for reperationer")]
-        [Required(ErrorMessage = "Denne knap er krævet")]
-        public bool? NeedsRepair { get; set; }  // to be implemented later
         [Display(Name = "Bådtype")]
         [Required(ErrorMessage = "Bådtype er krævet")]
         public BoatType? Type { get; set; }
+        /// <summary>
+        /// Returns true if the boat is available (ie not booked), and true if it is
+        /// </summary>
+        public bool IsAvailable 
+        { 
+            get
+            {
+                IBookingRepository bookingRepository = new BookingRepository();
+                foreach (var booking in bookingRepository.GetBookingsForBoat(Id))
+                {
+                    if (booking.BookingStart <= DateTime.Now)
+                    {
+                        return false;
+                    }
+                    
+                }
+                return true;
+            } 
+        }
+        /// <summary>
+        /// Returns the booking for the boat at DateTime.Now, or null if not booked
+        /// </summary>
+        public BoatBooking? CurrentBooking 
+        {
+            get
+            {
+                IBookingRepository bookingRepo = new BookingRepository();
+                foreach (var booking in bookingRepo.GetBookingsForBoat(Id))
+                {
+                    if (booking.BookingStart <= DateTime.Now)
+                    {
+                        return booking;
+                    }
+                }
+                return null;
+            }
+        }
 
         public override string ToString()
         {
@@ -35,7 +71,6 @@ namespace Henry.Models
                    $"ID: {Id.ToString()}\n" +
                    $"Beskrivelse: {Description}\n" +
                    $"Oprettet: {Created}\n" +
-                   $"Har brug for reparationer?: {NeedsRepair}\n" +
                    $"Bådtype: {Type}";
         }
     }

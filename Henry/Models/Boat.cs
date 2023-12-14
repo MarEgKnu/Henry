@@ -28,7 +28,7 @@ namespace Henry.Models
         [Required(ErrorMessage = "Bådtype er krævet")]
         public BoatType? Type { get; set; }
         /// <summary>
-        /// Returns true if the boat is available (ie not booked), and true if it is
+        /// Returns true if the boat is available right now (ie not booked), and false if it is not
         /// </summary>
         public bool IsAvailable 
         { 

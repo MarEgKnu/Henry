@@ -55,32 +55,53 @@ namespace Henry.Pages.Boats
             return Page();
         }
         // helper function to determine if a boat should be displayed on the page
+        //public bool DisplayBoat(string ViewOnlyRepairBoats, string ViewOnlyAvailable, Boat boat, int Hours, DateTime date)
+        //{
+        //    // if both filter options are on, and they all pass
+        //    if (_repairRepository.HasAnyRepairs(boat.Id) && HttpContext.Session.GetInt32(ViewOnlyRepairBoats) == 1 && HttpContext.Session.GetInt32(ViewOnlyAvailable) == 1 && !_bookingRepository.IsDateTimeBooked(date, date.AddHours(Hours), boat.Id))
+        //    {
+        //        return true;
+        //    }
+        //    // if only the ViewOnlyAvailable filter option is on and passes, but ViewOnlyRepairBoats option is not on
+        //    else if (HttpContext.Session.GetInt32(ViewOnlyRepairBoats) == null && HttpContext.Session.GetInt32(ViewOnlyAvailable) == 1 && !_bookingRepository.IsDateTimeBooked(date, date.AddHours(Hours), boat.Id))
+        //    {
+        //        return true;
+        //    }
+        //    // if only the ViewOnlyRepairBoats filter option is on and passes, but ViewOnlyAvailable option is not on
+        //    else if (_repairRepository.HasAnyRepairs(boat.Id) && HttpContext.Session.GetInt32(ViewOnlyRepairBoats) == 1 && HttpContext.Session.GetInt32(ViewOnlyAvailable) == null)
+        //    {
+        //        return true;
+        //    }
+        //    // if neither filter is on, display everything
+        //    else if (HttpContext.Session.GetInt32(ViewOnlyRepairBoats) == null && HttpContext.Session.GetInt32(ViewOnlyAvailable) == null)
+        //    {
+        //        return true;
+        //    }
+        //    // if its anything else, it dosent pass the check
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        // new refactored helper func
         public bool DisplayBoat(string ViewOnlyRepairBoats, string ViewOnlyAvailable, Boat boat, int Hours, DateTime date)
         {
-            // if both filter options are on, and they all pass
-            if (_repairRepository.HasAnyRepairs(boat.Id) && HttpContext.Session.GetInt32(ViewOnlyRepairBoats) == 1 && HttpContext.Session.GetInt32(ViewOnlyAvailable) == 1 && !_bookingRepository.IsDateTimeBooked(date, date.AddHours(Hours), boat.Id))
-            {
-                return true;
-            }
-            // if only the ViewOnlyAvailable filter option is on and passes, but ViewOnlyRepairBoats option is not on
-            else if (HttpContext.Session.GetInt32(ViewOnlyRepairBoats) == null && HttpContext.Session.GetInt32(ViewOnlyAvailable) == 1 && !_bookingRepository.IsDateTimeBooked(date, date.AddHours(Hours), boat.Id))
-            {
-                return true;
-            }
-            // if only the ViewOnlyRepairBoats filter option is on and passes, but ViewOnlyAvailable option is not on
-            else if (_repairRepository.HasAnyRepairs(boat.Id) && HttpContext.Session.GetInt32(ViewOnlyRepairBoats) == 1 && HttpContext.Session.GetInt32(ViewOnlyAvailable) == null)
-            {
-                return true;
-            }
-            // if neither filter is on, display everything
-            else if (HttpContext.Session.GetInt32(ViewOnlyRepairBoats) == null && HttpContext.Session.GetInt32(ViewOnlyAvailable) == null)
-            {
-                return true;
-            }
-            // if its anything else, it dosent pass the check
-            else
+            // if the boat does not have any repairs, and the user only want to view boats with repairs, skip it
+            if (!_repairRepository.HasAnyRepairs(boat.Id) && HttpContext.Session.GetInt32(ViewOnlyRepairBoats) == 1)
             {
                 return false;
+            }
+            // if the user wants to only see available boats, and the boat has a booking at the specified date, skip it
+            else if (HttpContext.Session.GetInt32(ViewOnlyAvailable) == 1 && _bookingRepository.IsDateTimeBooked(date, date.AddHours(Hours), boat.Id))
+            {
+
+                return false;
+            }
+            // if all checks passes, display the boat to the user
+            else
+            {
+                return true;
             }
         }
     }

@@ -41,7 +41,7 @@ else
             <input asp-format="{0:dd-MM-yyyyTHH:mm}" asp-for="@Model.Date" class="form-control" />
             <span asp-validation-for="@Model.Date" class="text-danger"></span>
         </div>
-        
+        Timer:
         <select asp-for="Hours">
             <option value="0">0</option>
             <option value="1">1</option>
@@ -96,8 +96,7 @@ else
     <tbody>
         @foreach (var boat in boatRepo.GetAllBoats() )
         {
-            // if the boat does not have any repairs, AND the user has the "viewonlyrepairboats" session var, display the boat
-            // alternatively, if the user hasent enabled "viewonlyrepairboats", display all regardless
+            // helper function
             if (Model.DisplayBoat("ViewOnlyRepairBoats", "ViewOnlyAvailable", boat, Model.Hours, Model.Date))
             {
                 

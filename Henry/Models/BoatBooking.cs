@@ -71,6 +71,23 @@ namespace Henry.Models
                 return result;
             }
         }
+        /// <summary>
+        /// returns true if the booking has exceeded its planned end
+        /// </summary>
+        public bool ExceededTime 
+        {
+            get
+            {
+                if (BookingEnd < DateTime.Now)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
 
         public int BoatId { get; set; }

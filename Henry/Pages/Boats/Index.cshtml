@@ -29,20 +29,30 @@
     // display only if the user has already enabled it so they only see boats that are available
     <form method="get">
         <input type="submit" asp-page-handler="ShowBoth" value="Vis også utilgængelige både" class="btn btn-primary" />
+        <input type="hidden" asp-for="@Model.Date" />
     </form>
 }
 else
 {
     <form method="get">
-        <input type="submit" asp-page-handler="ShowAvailable" value="Vis kun tilgængelige både inden for antal timer" class="btn btn-primary" />
+        <input type="submit" asp-page-handler="ShowAvailable" value="Vis kun tilgængelige både fra dato plus antal timer" class="btn btn-primary" />
+        <div class="form-group">
+            <label asp-for="@Model.Date" class="control-label">Booking tidspunkt</label>
+            <input asp-format="{0:dd-MM-yyyyTHH:mm}" asp-for="@Model.Date" class="form-control" />
+            <span asp-validation-for="@Model.Date" class="text-danger"></span>
+        </div>
+        
         <select asp-for="Hours">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
+            <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
             <option value="6">6</option>
             <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
         </select>
     </form>
 
@@ -52,15 +62,22 @@ else
     {
         // display only if the user has already enabled it so they only see boats in need of repair
         <form method="get">
-            <input type="submit" asp-page-handler="ShowAll" value="Vis alle både" class="btn btn-primary" />
+            <input type="submit" asp-page-handler="ShowAll" value="Vis også både uden reparationer" class="btn btn-primary" />
+        <input type="hidden" asp-for="@Model.Date" />
         </form>
     }
     else
     {
         <form method="get">
             <input type="submit" asp-page-handler="ShowRepair" value="Vis kun både med reparationer" class="btn btn-primary" />
+        <input type="hidden" asp-for="@Model.Date" />
         </form>
 
+    }
+    @if (Model.Date == DateTime.MinValue)
+    {
+        // if the Date variable isnt set (ie MinValue), set it to DateTime.Now
+        Model.Date = DateTime.Now;
     }
 
 <table class="table">
@@ -81,20 +98,20 @@ else
         {
             // if the boat does not have any repairs, AND the user has the "viewonlyrepairboats" session var, display the boat
             // alternatively, if the user hasent enabled "viewonlyrepairboats", display all regardless
-            if (Model.DisplayBoat("ViewOnlyRepairBoats", "ViewOnlyAvailable", boat, Model.Hours))
+            if (Model.DisplayBoat("ViewOnlyRepairBoats", "ViewOnlyAvailable", boat, Model.Hours, Model.Date))
             {
                 
                 <tr>
                     <td>@boat.Name</td>
                     <td>
-                        @if (bookingRepo.IsDateTimeBooked(DateTime.Now, DateTime.Now.AddHours(Model.Hours), boat.Id))
+                        @if (bookingRepo.IsDateTimeBooked(Model.Date, Model.Date.AddHours(Model.Hours), boat.Id))
                         {
-                            string booked = (Model.Hours == 0) ? "Booket lige nu" : $"Booket om {Model.Hours} timer";
+                            string booked = (Model.Hours == 0) ? $"Ikke tilgængelig den {Model.Date.ToString("g")}" : $"Ikke tilgængelig fra {Model.Date.ToString("g")} til {Model.Date.AddHours(Model.Hours).ToString("g")}";
                                             <p>@booked</p>
                         }
                         else
                         {
-                            string booked = (Model.Hours == 0) ? "Ikke booket lige nu" : $"Ikke booket om {Model.Hours} timer";
+                            string booked = (Model.Hours == 0) ? $"Tilgængelig den {Model.Date.ToString("g")}" : $"Tilgængelig fra {Model.Date.ToString("g")} til {Model.Date.AddHours(Model.Hours).ToString("g")}";
                             <p>@booked</p>
                         }
                     </td>

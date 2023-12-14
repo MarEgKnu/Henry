@@ -9,7 +9,6 @@
     "ICE": "Charlotte 12345678",
     "Memberstatus": true
   },
-  },
   {
     "UserId": 2,
     "Name": "Kirsten Jensen",
@@ -19,7 +18,6 @@
     "Pb": "French-sailor.jpg",
     "ICE": "Charlotte 12345678",
     "Memberstatus": false
-  },
   },
   {
     "UserId": 3,
@@ -41,5 +39,14 @@
     "ICE": "Charlotte 12345678",
     "Memberstatus": true
   },
+  {
+    "UserId": 5,
+    "Name": "Camilla Johannsen",
+    "Phone": "79451246",
+    "Email": "opfundetmail@adr.dk",
+    "Password": "Kage",
+    "Pb": "676a435f-babb-4e8e-bd4a-c118ae225c85_Gimsen.png",
+    "ICE": "Helle 12345666",
+    "Memberstatus": false
   }
 ]

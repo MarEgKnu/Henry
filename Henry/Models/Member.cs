@@ -16,6 +16,8 @@ namespace Henry.Models
         public string Password { get; set; }
         [DisplayName("Profilbillede")]
         public string? Pb { get; set; }
+        [Required(ErrorMessage ="Agiv kontaktperson med navn og telefonnummer"), DisplayName("Pårørende kontaktinformation")]
+        public string ICE { get; set; }
         public bool Memberstatus { get; set; }
     }
 }

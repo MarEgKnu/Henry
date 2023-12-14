@@ -34,6 +34,11 @@
         </div>
     </div>
     <div class="form-group">
+        <label asp-for="@Model.NewMember.ICE" class="control-label"></label>
+        <input asp-for="@Model.NewMember.ICE" class="form-control" />
+        <span asp-validation-for="@Model.NewMember.ICE" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <input type="submit" value="Opret Medlem" class="btn btn-primary" />
     </div>
 </form>

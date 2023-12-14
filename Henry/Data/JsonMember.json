@@ -5,7 +5,10 @@
     "Phone": "12345678",
     "Email": "ole@email.dk",
     "Password": "1234",
-    "Pb": "Beard-sailor.jpg"
+    "Pb": "Beard-sailor.jpg",
+    "ICE": "Charlotte 12345678",
+    "Memberstatus": true
+  },
   },
   {
     "UserId": 2,
@@ -13,7 +16,10 @@
     "Phone": "87654321",
     "Email": "kirsten@email.dk",
     "Password": "Password",
-    "Pb": "French-sailor.jpg"
+    "Pb": "French-sailor.jpg",
+    "ICE": "Charlotte 12345678",
+    "Memberstatus": false
+  },
   },
   {
     "UserId": 3,
@@ -22,6 +28,7 @@
     "Email": "smolboy@willsuckyourblood.com",
     "Password": "Cazador",
     "Pb": "astarion.jpg",
+    "ICE": "Charlotte 12345678",
     "Memberstatus": true
   },
   {
@@ -30,6 +37,9 @@
     "Phone": "26632663",
     "Email": "Honey@bear.Oak",
     "Password": "OakFather",
-    "Pb": "Halsin.jpg"
+    "Pb": "Halsin.jpg",
+    "ICE": "Charlotte 12345678",
+    "Memberstatus": true
+  },
   }
 ]

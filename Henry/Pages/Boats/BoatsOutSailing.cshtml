@@ -1,0 +1,53 @@
+﻿@page
+@using Henry.Interfaces
+@inject IBoatRepository boatRepo
+@inject IMemberRepository memberRepo
+@model Henry.Pages.Boats.BoatsOutSailingModel
+@{
+    ViewData["Title"] = "Både ude og sejle";
+}
+
+<h1>Både ude og sejle</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Båd</th>
+            <th>Båd ID</th>
+            <th>Bådtype</th>
+            <th>Booket af</th>
+            <th>Medsejlende</th>
+            <th>Starttid</th>
+            <th>Sluttid</th>
+            <th>Båd Billede</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var boat in boatRepo.GetAllBoats())
+        {
+            if (!boat.IsAvailable)
+            {
+                <tr>
+                    <td><a asp-page="ShowBoat" asp-page-handler="@boat.Id">@boat.Name</a></td>
+                    <td>@boat.Id</td>
+                    <td>@boat.Type</td>
+                    @if (boat.CurrentBooking != null)
+                    {
+                        <td>@memberRepo.GetMember(boat.CurrentBooking.UserId).Name</td>
+                        <td>@string.Join(",", boat.CurrentBooking.ExtraMemberNames)</td>
+                        <td>@boat.CurrentBooking.BookingStart.ToString("g")</td>
+                        <td>@boat.CurrentBooking.BookingEnd.ToString("g")</td>
+                    }
+                    else
+                    {
+                        <td>Fejl! Null reference</td>
+                        <td>Fejl! Null reference</td>
+                        <td>Fejl! Null reference</td>
+                        <td>Fejl! Null reference</td>
+                    }
+                    <td><img src="/Imgs/BoatImgs/@boat.Img" width="80" height="80" /></td>
+                </tr>
+            }
+        }
+    </tbody>
+
+</table>

@@ -22,6 +22,31 @@
 
     }
 }
+<a asp-page="BoatsOutSailing" style="float:right">Se både ude og sejle</a>
+
+@if (HttpContext.Session.GetInt32("ViewOnlyAvailable") == 1)
+{
+    // display only if the user has already enabled it so they only see boats that are available
+    <form method="get">
+        <input type="submit" asp-page-handler="ShowBoth" value="Vis også utilgængelige både" class="btn btn-primary" />
+    </form>
+}
+else
+{
+    <form method="get">
+        <input type="submit" asp-page-handler="ShowAvailable" value="Vis kun tilgængelige både inden for antal timer" class="btn btn-primary" />
+        <select asp-for="Hours">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+    </form>
+
+}
     
     @if (HttpContext.Session.GetInt32("ViewOnlyRepairBoats") == 1)
     {
@@ -30,19 +55,19 @@
             <input type="submit" asp-page-handler="ShowAll" value="Vis alle både" class="btn btn-primary" />
         </form>
     }
-     else
-     {
+    else
+    {
         <form method="get">
             <input type="submit" asp-page-handler="ShowRepair" value="Vis kun både med reparationer" class="btn btn-primary" />
         </form>
 
-     }
+    }
 
 <table class="table">
     <thead>
         <tr>
             <th>Navn</th>
-            <th>Bookinger</th>
+            <th>Status</th>
             <th>Beskrivelse</th>
             <th>Oprettet</th>
             <th>Bådtype</th>
@@ -56,30 +81,22 @@
         {
             // if the boat does not have any repairs, AND the user has the "viewonlyrepairboats" session var, display the boat
             // alternatively, if the user hasent enabled "viewonlyrepairboats", display all regardless
-            if ((repairRepo.HasAnyRepairs(boat.Id) && HttpContext.Session.GetInt32("ViewOnlyRepairBoats") == 1) || HttpContext.Session.GetInt32("ViewOnlyRepairBoats") == null)
-            {              
+            if (Model.DisplayBoat("ViewOnlyRepairBoats", "ViewOnlyAvailable", boat, Model.Hours))
+            {
+                
                 <tr>
                     <td>@boat.Name</td>
                     <td>
-                        @{
-                            // checks if the boat has 1 or more bookings, and if it does display all the bookings
-
-                            if (!bookingRepo.HasAnyBookings(boat.Id))
-                            {
-                                <p>Ingen bookinger</p>
-                            }
-                            else
-                            {
-                                <ul>
-                                @foreach (var booking in bookingRepo.GetBookingsForBoat(boat.Id))
-                                {
-                                        <li>Booket fra @booking.BookingStart.ToString("g") til @booking.BookingEnd.ToString("g") af @string.Join(",", booking.AllMemberNames) </li>
-
-                                }
-                                </ul>
-
-                            }    
-                     }
+                        @if (bookingRepo.IsDateTimeBooked(DateTime.Now, DateTime.Now.AddHours(Model.Hours), boat.Id))
+                        {
+                            string booked = (Model.Hours == 0) ? "Booket lige nu" : $"Booket om {Model.Hours} timer";
+                                            <p>@booked</p>
+                        }
+                        else
+                        {
+                            string booked = (Model.Hours == 0) ? "Ikke booket lige nu" : $"Ikke booket om {Model.Hours} timer";
+                            <p>@booked</p>
+                        }
                     </td>
                     <td>@boat.Description</td>
                     <td>@boat.Created.ToShortDateString()</td>

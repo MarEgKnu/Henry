@@ -10,7 +10,8 @@
         <label>Event id</label> : @Model.DeleteEvent.Id <br />
         <label>Event Navn</label> : @Model.DeleteEvent.Name <br />
         <label>Event Beskrivelse</label> : @Model.DeleteEvent.Description <br />
-        <label>Event Dato</label> : @Model.DeleteEvent.DateTime <br />
+        <label>Event Dato</label> : @Model.DeleteEvent.UserEventStart <br />
+        <label>Event Dato</label> : @Model.DeleteEvent.UserEventEnd <br />
 
         <input type="submit" asp-page-handler="Delete" asp-route-number="@Model.DeleteEvent.Id" value="Slet event" />
     </div>

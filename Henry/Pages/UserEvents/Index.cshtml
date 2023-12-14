@@ -27,7 +27,8 @@
                     <td>@Model.Events[i].Id</td>
                     <td>@Model.Events[i].Name</td>
                     <td>@Model.Events[i].Description</td>
-                    <td>@Model.Events[i].DateTime</td>
+                    <td>@Model.Events[i].UserEventStart</td>
+                    <td>@Model.Events[i].UserEventEnd</td>
                     <td><img src="~/Imgs/EventImages/@Model.Events[i].Img" width="80" height="80" /></td>
                     <td><input name="IsChecked" type="checkbox" asp-for="@Model.UserEvents[i].Joined" /></td>
                     @* <td>@item.Id</td>

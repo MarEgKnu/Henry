@@ -18,9 +18,14 @@
         <input asp-for="@Model.NewEvent.Description" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="@Model.NewEvent.DateTime" class="control-label">Dato</label>
-        <input asp-for="@Model.NewEvent.DateTime" class="form-control" />
-        <span asp-validation-for="NewEvent.DateTime" class="text-danger"></span>
+        <label asp-for="@Model.NewEvent.UserEventStart" class="control-label">Dato</label>
+        <input asp-for="@Model.NewEvent.UserEventStart" class="form-control" />
+        <span asp-validation-for="NewEvent.UserEventStart" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.NewEvent.UserEventEnd" class="control-label">Dato</label>
+        <input asp-for="@Model.NewEvent.UserEventEnd" class="form-control" />
+        <span asp-validation-for="NewEvent.UserEventEnd" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="@Model.Photo" class="control-label">Billede</label>

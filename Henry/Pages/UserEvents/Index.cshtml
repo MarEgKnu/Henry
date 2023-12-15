@@ -31,7 +31,7 @@
                     <td>@Model.Events[i].UserEventStart</td>
                     <td>@Model.Events[i].UserEventEnd</td>
                     <td><img src="~/Imgs/EventImages/@Model.Events[i].Img" width="80" height="80" /></td>
-                    <td><input name="IsChecked" type="checkbox" asp-for="@Model.UserEvents[i].Joined" /></td>
+                    <td><input name="IsChecked" type="checkbox" value="@Model.Events[i].Id" /></td>
                     @* <td>@item.Id</td>
                     <td>@item.Name</td>
                     <td>@item.Description</td>
@@ -42,7 +42,7 @@
             }
         </tbody>
     </table>
-    <button>Add events</button>
+    <input type="submit">Add events</input>
 </form>
 
 

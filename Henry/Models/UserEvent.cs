@@ -11,10 +11,15 @@ namespace Henry.Models
 
         public int EventId { get; set; }
 
-        public DateTime UserEventStart { get; set; }
+        public UserEvent()
+        {
+            
+        }
 
-        public DateTime UserEventEnd { get; set; }
-
-        public bool Joined { get; set; }
+        public UserEvent(int userID, int eventId)
+        {
+            UserId = userID;
+            EventId = eventId;
+        }
     }
 }

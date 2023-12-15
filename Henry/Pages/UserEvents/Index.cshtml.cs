@@ -14,8 +14,9 @@ namespace Henry.Pages.UserEvents
         public List<Event> Events { get; private set; }
         public List<UserEvent> UserEvents { get; set; }
         [BindProperty]
-        public bool? IsChecked { get; set; }
+        public List<int> IsChecked { get; set; }
         public UserEvent UserEvent { get; set; }
+        public Member Member { get; set; }
 
         public IndexModel(IEventRepository eventRepository, IUserEventRepository userEventRepo, IMemberRepository memberRepository)
         {
@@ -36,11 +37,27 @@ namespace Henry.Pages.UserEvents
             }
 
         }
-        public void OnPost()
+        public IActionResult OnPost()
         {
             //UserEvents.Joined
-            UserEvent.EventId = MemberRepository.GetLoggedInMember(HttpContext).UserId;
-            _userEventRepo.AddUserEvent(UserEvent);
+            //UserEvent.EventId = MemberRepository.GetLoggedInMember(HttpContext).UserId;
+            //if (!(MemberRepository.GetLoggedInMember(HttpContext).UserId == UserEvent.UserId))
+            //{
+
+            //}
+            //Indlæs alle Userevents
+            List <UserEvent> userEvents = _userEventRepo.GetAllUserEvents();
+            int currentUserId = MemberRepository.GetLoggedInMember(HttpContext).UserId;
+            foreach (var isChecked in IsChecked)
+            {
+                //checke om man er tilmeldt ved at løbe userevents igennem
+                UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
+                _userEventRepo.AddUserEvent(newUserEvent);
+            }
+            return RedirectToPage("/Index");
+
+            //UserEvent.EventId = Is
+            //_userEventRepo.AddUserEvent(UserEvent);
         }
     }
 }

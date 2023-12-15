@@ -1,6 +1,6 @@
 [
   {
-    "BookingId": 1,
+    "BookingId": 2,
     "UserId": 3,
     "ExtraUsersIds": null,
     "AllMemberNames": [
@@ -11,32 +11,7 @@
       3
     ],
     "BoatId": 1,
-    "BookingStart": "2023-12-22T18:03:00",
-    "BookingEnd": "2023-12-30T18:03:00"
-  },
-  {
-    "BookingId": 2,
-    "UserId": 3,
-    "ExtraUsersIds": [
-      2,
-      4
-    ],
-    "AllMemberNames": [
-      "Astarion Acunin",
-      "Kirsten Jensen",
-      "Halsin"
-    ],
-    "ExtraMemberNames": [
-      "Kirsten Jensen",
-      "Halsin"
-    ],
-    "AllMemberIds": [
-      3,
-      2,
-      4
-    ],
-    "BoatId": 1,
-    "BookingStart": "2023-12-13T18:07:00",
-    "BookingEnd": "2023-12-21T18:07:00"
+    "BookingStart": "2023-12-14T13:40:00",
+    "BookingEnd": "2023-12-16T13:37:00"
   }
 ]

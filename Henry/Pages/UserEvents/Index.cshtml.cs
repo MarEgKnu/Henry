@@ -17,14 +17,24 @@ namespace Henry.Pages.UserEvents
         public bool? IsChecked { get; set; }
         public UserEvent UserEvent { get; set; }
 
-        public IndexModel(IEventRepository eventRepository, IUserEventRepository userEventRepo)
+        public IndexModel(IEventRepository eventRepository, IUserEventRepository userEventRepo, IMemberRepository memberRepository)
         {
             _eventRepo = eventRepository;
             _userEventRepo = userEventRepo;
+            MemberRepository = memberRepository;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
             Events = _eventRepo.GetEvents();
+            if (!MemberRepository.VerifySession(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogIn");
+            }
+            else
+            {
+                return Page();
+            }
+
         }
         public void OnPost()
         {

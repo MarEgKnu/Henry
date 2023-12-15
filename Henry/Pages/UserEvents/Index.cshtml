@@ -1,6 +1,6 @@
 ﻿@page
 @model Henry.Pages.UserEvents.IndexModel
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContext;
+@* @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContext; *@
 @inject Interfaces.IMemberRepository memberRepo;
 @{
     ViewData["Title"] = "Tilmeldning";
@@ -21,6 +21,7 @@
         </thead>
         <tbody>
             @* @foreach (var item in Model.Events) *@
+            @HttpContext.Session.GetInt32("UId")
             @for (var i = 0; i < Model.Events.Count(); i++)
             {
                 <tr>

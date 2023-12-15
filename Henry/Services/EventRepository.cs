@@ -36,6 +36,7 @@ namespace Henry.Services
                     break;
                 }
             }
+            ev.Joined = false;
             events.Add(ev);
             JsonFileWriter<Event>.WriteToJson(events, _jsonFileName);
         }
@@ -91,7 +92,8 @@ namespace Henry.Services
                     {
                         e.Name = ev.Name;
                         e.Description = ev.Description;
-                        e.DateTime = ev.DateTime;
+                        e.UserEventStart = ev.UserEventStart;
+                        e.UserEventEnd = ev.UserEventEnd;
                         if (e.Img != null && e.Img != ev.Img)
                         {
                             string[] paths = { _env.WebRootPath, "Imgs", "EventImages", e.Img };

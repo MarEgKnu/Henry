@@ -11,6 +11,7 @@ builder.Services.AddTransient<IBoatRepository, BoatRepository>();
 builder.Services.AddTransient<IBookingRepository, BookingRepository>();
 builder.Services.AddTransient<IBlogRepository, BlogRepository>();
 builder.Services.AddTransient<IRepairRepository, RepairRepository>();
+builder.Services.AddTransient<IUserEventRepository, UserEventRepository>();
 
 builder.Services.AddSession(); 
 builder.Services.AddHttpContextAccessor();

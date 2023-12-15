@@ -14,9 +14,15 @@ namespace Henry.Pages.Members
         {
             _repoMember = memberRepository;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (!_repoMember.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
+     
             Members = _repoMember.GetAllMembers();
+            return Page();
         }
     }
 }

@@ -75,6 +75,7 @@ namespace Henry.Services
                         m.Phone = me.Phone;
                         m.Email = me.Email;
                         m.Pb = me.Pb;
+                        m.ICE = me.ICE;
                         break;
                     }
                 }

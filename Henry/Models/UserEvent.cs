@@ -1,4 +1,7 @@
-﻿namespace Henry.Models
+﻿using Henry.Interfaces;
+using Henry.Services;
+
+namespace Henry.Models
 {
     public class UserEvent
     {

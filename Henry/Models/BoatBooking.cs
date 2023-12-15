@@ -8,6 +8,8 @@ namespace Henry.Models
 {
     public class BoatBooking
     {
+        [BindProperty]
+        public string Location { get; set; }
         public int BookingId { get; set; }
 
         public int UserId { get; set; }

@@ -38,11 +38,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Blogs/Index">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Members/Index">Medlemmer</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Events/Index">Event</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Index">Bookings</a>
-                        </li>
+                        @if (memberRepo.VerifySessionAdmin(Context))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Members/Index">Medlemmer</a>
+                            </li>
+                        }
+                        @if (memberRepo.VerifySession(Context))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Index">Bookinger</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Repairs/Index">Reparationer</a>
                         </li>

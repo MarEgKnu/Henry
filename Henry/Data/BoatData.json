@@ -5,7 +5,24 @@
     "Description": "e",
     "Img": "34aaf2fd-78c7-43ea-82ba-0b650fb859f3_wrestling.jpg",
     "Created": "2023-12-01T11:36:15.3298272+01:00",
-    "Type": 0
+    "Type": 0,
+    "IsAvailable": false,
+    "CurrentBooking": {
+      "BookingId": 2,
+      "UserId": 3,
+      "ExtraUsersIds": null,
+      "AllMemberNames": [
+        "Astarion Acunin"
+      ],
+      "ExtraMemberNames": [],
+      "AllMemberIds": [
+        3
+      ],
+      "ExceededTime": false,
+      "BoatId": 1,
+      "BookingStart": "2023-12-14T13:40:00",
+      "BookingEnd": "2023-12-16T13:37:00"
+    }
   },
   {
     "Id": 2,
@@ -13,6 +30,18 @@
     "Description": "Ny Motorb\u00E5d fra 2020, pas godt p\u00E5 den er sgu hurtig. Kr\u00E6ver diesel for at sejle.",
     "Img": "007cdae9-d6ac-4704-88c7-3d2adb91a993_wrestling.jpg",
     "Created": "2023-12-12T18:33:58.3635768+01:00",
-    "Type": 2
+    "Type": 2,
+    "IsAvailable": true,
+    "CurrentBooking": null
+  },
+  {
+    "Id": 3,
+    "Name": "Superb\u00E5\u00E5d",
+    "Description": "big b\u00E5d",
+    "Img": "71395c36-67ea-4dc7-a2f6-08be9a202bf0_KageBagning.jpg",
+    "Created": "2023-12-14T23:23:24.4055744+01:00",
+    "Type": 1,
+    "IsAvailable": true,
+    "CurrentBooking": null
   }
 ]

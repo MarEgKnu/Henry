@@ -13,6 +13,7 @@
     <p>Starttid: @Model.BookingToDelete.BookingStart.ToString("g")</p>
     <p>Sluttid: @Model.BookingToDelete.BookingEnd.ToString("g")</p>
     <p>Medlem: @memberRepo.GetMember(Model.BookingToDelete.UserId).Name</p>
+    <p>Lokation: @Model.BookingToDelete.Location</p>
     <p>Medsejlende: @string.Join(",", Model.BookingToDelete.ExtraMemberNames)</p>
     <p>ID: @Model.BookingToDelete.BookingId</p>
 </div>

@@ -27,7 +27,7 @@
             if (!boat.IsAvailable)
             {
                 <tr>
-                    <td><a asp-page="ShowBoat" asp-page-handler="@boat.Id">@boat.Name</a></td>
+                    <td><a asp-page="/Boats/ShowBoat" asp-route-id="@boat.Id">@boat.Name</a></td>
                     <td>@boat.Id</td>
                     <td>@boat.Type</td>
                     @if (boat.CurrentBooking != null)

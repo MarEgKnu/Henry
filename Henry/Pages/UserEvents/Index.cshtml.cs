@@ -50,6 +50,7 @@ namespace Henry.Pages.UserEvents
             int currentUserId = MemberRepository.GetLoggedInMember(HttpContext).UserId;
             foreach (var isChecked in IsChecked)
             {
+                bool noEvent = true;
                 //checke om man er tilmeldt ved at løbe userevents igennem
                 if (userEvents.Count == 0)
                 {
@@ -62,11 +63,22 @@ namespace Henry.Pages.UserEvents
                     {
                         if (currentUserId != userEvent.UserId)
                         {
-                            UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
-                            _userEventRepo.AddUserEvent(newUserEvent);
+                            //UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
+                            //_userEventRepo.AddUserEvent(newUserEvent);
+                        }
+                        else if (userEvent.UserId == currentUserId)
+                        {
+                            noEvent = false;
+                            _userEventRepo.DeleteUserEvent(_userEventRepo.GetUserEvent(userEvent.UserEventId));
                         }
                     }
                 }
+                if (noEvent) 
+                {
+                    UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
+                    _userEventRepo.AddUserEvent(newUserEvent);
+                }
+                userEvents = _userEventRepo.GetAllUserEvents();
             }
             return RedirectToPage("/Index");
 

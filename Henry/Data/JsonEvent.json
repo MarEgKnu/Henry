@@ -6,7 +6,15 @@
     "UserEventStart": "2023-12-14T02:24:00",
     "UserEventEnd": "2023-12-15T03:24:00",
     "Img": "d09f84a9-9709-4045-9840-24b7972eeeb7_04d41d01-7eda-4013-86c9-02d4c96019b8_ultraluxe.jpg",
-    "Members": null,
+    "Joined": false
+  },
+  {
+    "Id": 1,
+    "Name": "sejltur",
+    "Description": "en sejltur",
+    "UserEventStart": "2024-02-02T03:02:00",
+    "UserEventEnd": "2024-03-06T02:02:00",
+    "Img": "96ac5aa4-8a9a-4bbd-b2dd-414790f2c589_14f19658-3b9c-4dee-ade3-1e1927d117e3_thumbs_347249213_10226474321417331_3857919043266777932_n.jpg",
     "Joined": false
   }
 ]

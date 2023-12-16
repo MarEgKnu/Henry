@@ -51,8 +51,22 @@ namespace Henry.Pages.UserEvents
             foreach (var isChecked in IsChecked)
             {
                 //checke om man er tilmeldt ved at løbe userevents igennem
-                UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
-                _userEventRepo.AddUserEvent(newUserEvent);
+                if (userEvents.Count == 0)
+                {
+                    UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
+                    _userEventRepo.AddUserEvent(newUserEvent);
+                }
+                else
+                {
+                    foreach (var userEvent in userEvents)
+                    {
+                        if (currentUserId != userEvent.UserId)
+                        {
+                            UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
+                            _userEventRepo.AddUserEvent(newUserEvent);
+                        }
+                    }
+                }
             }
             return RedirectToPage("/Index");
 

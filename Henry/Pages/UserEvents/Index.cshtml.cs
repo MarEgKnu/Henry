@@ -66,7 +66,7 @@ namespace Henry.Pages.UserEvents
                             //UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
                             //_userEventRepo.AddUserEvent(newUserEvent);
                         }
-                        else if (userEvent.UserId == currentUserId)
+                        else if (userEvent.UserId == currentUserId && isChecked == userEvent.EventId)
                         {
                             noEvent = false;
                             _userEventRepo.DeleteUserEvent(_userEventRepo.GetUserEvent(userEvent.UserEventId));

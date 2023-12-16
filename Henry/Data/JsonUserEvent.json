@@ -3,5 +3,15 @@
     "UserEventId": 2,
     "UserId": 4,
     "EventId": 2
+  },
+  {
+    "UserEventId": 3,
+    "UserId": 2,
+    "EventId": 1
+  },
+  {
+    "UserEventId": 1,
+    "UserId": 3,
+    "EventId": 1
   }
 ]

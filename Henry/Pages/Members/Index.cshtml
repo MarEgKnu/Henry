@@ -22,7 +22,7 @@
             {
                 <tr>
                 <td>@M.UserId</td>
-                <td> <div> class="popup" onclick=" myFunction()"@M.Name <span class="popuptext" id=" myPopup">@M.ICE </span> </div> </td>
+                <td> <div class="popup" onclick="myFunction(@M.UserId)">@M.Name <span class="popuptext" id="myPopup@(M.UserId)">@M.ICE </span> </div> </td>
                 <td>@M.Phone</td>
                 <td>@M.Email</td>
                 <td><img src="/Imgs/MemberImages/@M.Pb" width="100" height="100"/></td>
@@ -35,8 +35,8 @@
 </table>
 <script>
     // When the user clicks on <div>, open the popup
-    function myFunction() {
-        var popup = document.getElementById("myPopup");
+    function myFunction(UserId) {
+        var popup = document.getElementById("myPopup" + UserId);
         popup.classList.toggle("show");
     }
 </script>

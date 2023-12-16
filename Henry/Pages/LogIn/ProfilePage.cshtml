@@ -1,4 +1,6 @@
 ﻿@page
+@using Henry.Interfaces
+@inject IMemberRepository Repo
 @model Henry.Pages.LogIn.ProfilePageModel
 @{
     ViewData["Title"] = "Profil";
@@ -26,9 +28,17 @@
     </style>
 </head> <!--This is the body of the "Profile card"-->
 <body>
-
-    <h2 style="text-align:center">Profil</h2>
-
+    @if(Repo.VerifySessionAdmin(HttpContext))
+    {
+        <h2 style="text-align:center">
+            <em>You dropped this </em> &#128081;
+        </h2>
+    }
+    else
+    {<h2 style="text-align:center">
+            <em>Hello there Sailor </em>&#128156;
+        </h2>
+    }
     <div class="card">
         <img src="/Imgs/MemberImages/@Model.CurrentMember.Pb"  alt="Profilbillede" style="width:100%"/>
         <h1>@Model.CurrentMember.Name</h1>

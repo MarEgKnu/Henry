@@ -34,16 +34,19 @@
                     <td>@boat.Type</td>
                     @if (boat.CurrentBooking != null)
                     {
+                        //Pop-up for ICE for the member who booked the boat
                         <td>
                             <div class="popup" onclick="myFunction(@boat.Id)">@memberRepo.GetMember(boat.CurrentBooking.UserId).Name <span class="popuptext" id="myPopup@(boat.Id)">@memberRepo.GetMember(boat.CurrentBooking.UserId).ICE </span> </div>
                         </td>
-                        //Explicit cast
+                        //Explicit cast. This makes a pop-up with the ICE of each "medsejlende".
                         <td>
                             @if (boat.CurrentBooking.ExtraUsersIds != null)
                             {
                                 @foreach (var ExtraMemberId in boat.CurrentBooking.ExtraUsersIds)
                                 {
-                                    <div class="popup" onclick="myFunction2(@ExtraMemberId,@boat.Id)">@memberRepo.GetMember(ExtraMemberId).Name <span class="popuptext" id="myPopup2@(ExtraMemberId)@(boat.Id)">@memberRepo.GetMember(ExtraMemberId).ICE </span> </div>
+                                    <div class="popup" onclick="myFunction2(@ExtraMemberId,@boat.Id)">@memberRepo.GetMember(ExtraMemberId).Name 
+                                    <span class="popuptext" id="myPopup2@(ExtraMemberId)@(boat.Id)">@memberRepo.GetMember(ExtraMemberId).ICE </span> 
+                                    </div>
                                 }
                             }
                            

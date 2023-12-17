@@ -80,7 +80,7 @@ namespace Henry.Pages.UserEvents
                 }
                 userEvents = _userEventRepo.GetAllUserEvents();
             }
-            return RedirectToPage("/Index");
+            return RedirectToPage("/UserEvents/ViewEvents");
 
             //UserEvent.EventId = Is
             //_userEventRepo.AddUserEvent(UserEvent);

@@ -1,0 +1,42 @@
+﻿@page
+@model Henry.Pages.UserEvents.ViewEventsModel
+@inject Interfaces.IMemberRepository memberRepo;
+@inject Interfaces.IEventRepository eventRepo;
+@{
+    ViewData["Title"] = "Se events";
+}
+
+<p>
+    <a asp-page="Index">Tilføj/fjern events</a>
+</p>
+
+<h1>Tilmeldning</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Navn</th>
+            <th>Beskrivelse</th>
+            <th>Dato start</th>
+            <th>Dato slut</th>
+            <th>Billede</th>
+        </tr>
+    </thead>
+    <tbody>
+        @HttpContext.Session.GetInt32("UId")
+        @foreach (var item in Model.UserEvents)
+        {
+            @if(memberRepo.GetLoggedInMember(HttpContext).UserId == item.UserId)
+            {
+                <tr>
+                    <td>@eventRepo.GetEvent(item.EventId).Id</td>
+                    <td>@eventRepo.GetEvent(item.EventId).Name</td>
+                    <td>@eventRepo.GetEvent(item.EventId).Description</td>
+                    <td>@eventRepo.GetEvent(item.EventId).UserEventStart</td>
+                    <td>@eventRepo.GetEvent(item.EventId).UserEventEnd</td>
+                    <td><img src="~/Imgs/EventImages/@eventRepo.GetEvent(item.EventId).Img" width="80" height="80" /></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -10,8 +10,13 @@
     "EventId": 2
   },
   {
-    "UserEventId": 1,
-    "UserId": 3,
+    "UserEventId": 4,
+    "UserId": 5,
     "EventId": 2
+  },
+  {
+    "UserEventId": 5,
+    "UserId": 5,
+    "EventId": 1
   }
 ]

@@ -52,5 +52,22 @@
     "BoatId": 2,
     "BookingStart": "2023-12-14T12:55:00",
     "BookingEnd": "2023-12-18T14:55:00"
+  },
+  {
+    "Location": "Gilleleje",
+    "BookingId": 3,
+    "UserId": 5,
+    "ExtraUsersIds": null,
+    "AllMemberNames": [
+      "Camilla Johannsen"
+    ],
+    "ExtraMemberNames": [],
+    "AllMemberIds": [
+      5
+    ],
+    "ExceededTime": false,
+    "BoatId": 1,
+    "BookingStart": "2023-12-18T10:37:00",
+    "BookingEnd": "2023-12-18T10:40:00"
   }
 ]

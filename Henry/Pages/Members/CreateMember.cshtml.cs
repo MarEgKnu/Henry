@@ -49,7 +49,7 @@ namespace Henry.Pages.Members
             }
             
             _memberRepo.CreateMember(NewMember);
-            return RedirectToPage("Index");
+            return RedirectToPage("/Index");
         }
     }
 }

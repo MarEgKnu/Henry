@@ -20,7 +20,6 @@ namespace Henry.Models
 
         public DateTime? UserEventEnd { get; set; }
         public string? Img { get { return _img; } set { _img = value; } }
-        public bool Joined { get; set; }
 
         public Event()
         {

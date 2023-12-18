@@ -1,14 +1,19 @@
-﻿namespace Henry.Models
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace Henry.Models
 {
     public class Blog
     {
         public int Id { get; set; }
-
+        [Required]
+        [DisplayName("Titel")]
         public string Title { get; set; }
-
+        [Required]
+        [DisplayName("Indhold")]
         public string Content { get; set; }
 
-        public string Img { get; set; }
+        public string? Img { get; set; }
 
         public int CreatorUserId { get; set; }
 

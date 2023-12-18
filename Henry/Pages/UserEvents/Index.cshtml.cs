@@ -39,34 +39,22 @@ namespace Henry.Pages.UserEvents
         }
         public IActionResult OnPost()
         {
-            //UserEvents.Joined
-            //UserEvent.EventId = MemberRepository.GetLoggedInMember(HttpContext).UserId;
-            //if (!(MemberRepository.GetLoggedInMember(HttpContext).UserId == UserEvent.UserId))
-            //{
-
-            //}
-            //Indlæs alle Userevents
             List <UserEvent> userEvents = _userEventRepo.GetAllUserEvents();
             int currentUserId = MemberRepository.GetLoggedInMember(HttpContext).UserId;
             foreach (var isChecked in IsChecked)
             {
                 bool noEvent = true;
-                //checke om man er tilmeldt ved at løbe userevents igennem
                 if (userEvents.Count == 0)
                 {
                     UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
                     _userEventRepo.AddUserEvent(newUserEvent);
+                    noEvent = false;
                 }
                 else
                 {
                     foreach (var userEvent in userEvents)
                     {
-                        if (currentUserId != userEvent.UserId)
-                        {
-                            //UserEvent newUserEvent = new UserEvent(currentUserId, isChecked);
-                            //_userEventRepo.AddUserEvent(newUserEvent);
-                        }
-                        else if (userEvent.UserId == currentUserId && isChecked == userEvent.EventId)
+                        if (userEvent.UserId == currentUserId && isChecked == userEvent.EventId)
                         {
                             noEvent = false;
                             _userEventRepo.DeleteUserEvent(_userEventRepo.GetUserEvent(userEvent.UserEventId));
@@ -81,9 +69,6 @@ namespace Henry.Pages.UserEvents
                 userEvents = _userEventRepo.GetAllUserEvents();
             }
             return RedirectToPage("/UserEvents/ViewEvents");
-
-            //UserEvent.EventId = Is
-            //_userEventRepo.AddUserEvent(UserEvent);
         }
     }
 }

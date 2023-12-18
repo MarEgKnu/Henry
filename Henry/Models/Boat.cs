@@ -44,12 +44,12 @@ namespace Henry.Models
                     
                 }
                 return true;
-            } 
+            }
         }
         /// <summary>
         /// Returns the booking for the boat at DateTime.Now, or null if not booked
         /// </summary>
-        public BoatBooking? CurrentBooking 
+        public BoatBooking? CurrentBooking
         {
             get
             {
@@ -64,6 +64,20 @@ namespace Henry.Models
                 return null;
             }
         }
+        public bool IsExpired()
+        {
+            IBookingRepository bookingRepository = new BookingRepository();
+            foreach (var booking in bookingRepository.GetBookingsForBoat(Id))
+            {
+                if (booking.BookingEnd <= DateTime.Now)
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
 
         public override string ToString()
         {

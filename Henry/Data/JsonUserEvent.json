@@ -1,22 +1,17 @@
 [
   {
-    "UserEventId": 2,
-    "UserId": 4,
+    "UserEventId": 1,
+    "UserId": 3,
     "EventId": 2
   },
   {
+    "UserEventId": 2,
+    "UserId": 3,
+    "EventId": 1
+  },
+  {
     "UserEventId": 3,
-    "UserId": 2,
-    "EventId": 1
-  },
-  {
-    "UserEventId": 4,
-    "UserId": 3,
-    "EventId": 1
-  },
-  {
-    "UserEventId": 1,
-    "UserId": 3,
+    "UserId": 1,
     "EventId": 2
   }
 ]

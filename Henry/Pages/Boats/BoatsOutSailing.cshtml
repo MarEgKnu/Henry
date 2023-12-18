@@ -19,6 +19,7 @@
             <th>Starttid</th>
             <th>Sluttid</th>
             <th>Lokation</th>
+            <th>Status</th>
             <th>Båd Billede</th>
         </tr>
     </thead>
@@ -33,11 +34,37 @@
                     <td>@boat.Type</td>
                     @if (boat.CurrentBooking != null)
                     {
-                        <td>@memberRepo.GetMember(boat.CurrentBooking.UserId).Name</td>
-                        <td>@string.Join(",", boat.CurrentBooking.ExtraMemberNames)</td>
+                        //Pop-up for ICE for the member who booked the boat
+                        <td>
+                            <div class="popup" onclick="myFunction(@boat.Id)">@memberRepo.GetMember(boat.CurrentBooking.UserId).Name 
+                             <span class="popuptext" id="myPopup@(boat.Id)">@memberRepo.GetMember(boat.CurrentBooking.UserId).ICE </span> </div>
+                        </td>
+                        //Explicit cast. This makes a pop-up with the ICE of each "medsejlende".
+                        <td>
+                            @if (boat.CurrentBooking.ExtraUsersIds != null)
+                            {
+                                @foreach (var ExtraMemberId in boat.CurrentBooking.ExtraUsersIds)
+                                {
+                                    <div class="popup" onclick="myFunction2(@ExtraMemberId,@boat.Id)">@memberRepo.GetMember(ExtraMemberId).Name 
+                                    <span class="popuptext" id="myPopup2@(ExtraMemberId)@(boat.Id)">@memberRepo.GetMember(ExtraMemberId).ICE </span> 
+                                    </div>
+                                }
+                            }
+                           
+                        </td>
                         <td>@boat.CurrentBooking.BookingStart.ToString("g")</td>
                         <td>@boat.CurrentBooking.BookingEnd.ToString("g")</td>
                         <td>@boat.CurrentBooking.Location</td>
+                        @if (@boat.IsExpired())
+                        {
+                            <td>&#128997;</td>
+                        }
+
+                        else
+                        {
+                            <td>&#129001;</td>
+                        }
+                       
                     }
                     else
                     {
@@ -54,3 +81,14 @@
     </tbody>
 
 </table>
+<script>
+    // When the user clicks on <div>, open the popup
+    function myFunction(UserId) {
+        var popup = document.getElementById("myPopup" + UserId);
+        popup.classList.toggle("show");
+    }
+    function myFunction2(UserId, BoatId) {
+        var popup = document.getElementById("myPopup2" + UserId + BoatId);
+        popup.classList.toggle("show");
+    }
+</script>

@@ -1,59 +1,5 @@
 [
   {
-    "Location": "Esrum S\u00F8",
-    "BookingId": 1,
-    "UserId": 3,
-    "ExtraUsersIds": [
-      2,
-      4
-    ],
-    "AllMemberNames": [
-      "Astarion Acunin",
-      "Kirsten Jensen",
-      "Halsin"
-    ],
-    "ExtraMemberNames": [
-      "Kirsten Jensen",
-      "Halsin"
-    ],
-    "AllMemberIds": [
-      3,
-      2,
-      4
-    ],
-    "ExceededTime": false,
-    "BoatId": 3,
-    "BookingStart": "2023-12-15T10:02:00",
-    "BookingEnd": "2023-12-18T11:01:00"
-  },
-  {
-    "Location": "Chionthar",
-    "BookingId": 2,
-    "UserId": 3,
-    "ExtraUsersIds": [
-      4,
-      5
-    ],
-    "AllMemberNames": [
-      "Astarion Acunin",
-      "Halsin",
-      "Camilla Johannsen"
-    ],
-    "ExtraMemberNames": [
-      "Halsin",
-      "Camilla Johannsen"
-    ],
-    "AllMemberIds": [
-      3,
-      4,
-      5
-    ],
-    "ExceededTime": false,
-    "BoatId": 2,
-    "BookingStart": "2023-12-14T12:55:00",
-    "BookingEnd": "2023-12-18T14:55:00"
-  },
-  {
     "Location": "Gilleleje",
     "BookingId": 3,
     "UserId": 5,
@@ -65,9 +11,82 @@
     "AllMemberIds": [
       5
     ],
-    "ExceededTime": false,
+    "ExceededTime": true,
     "BoatId": 1,
     "BookingStart": "2023-12-18T10:37:00",
     "BookingEnd": "2023-12-18T10:40:00"
+  },
+  {
+    "Location": "Esrum S\u00F8",
+    "BookingId": 4,
+    "UserId": 3,
+    "ExtraUsersIds": [
+      4
+    ],
+    "AllMemberNames": [
+      "Astarion Acunin",
+      "Halsin"
+    ],
+    "ExtraMemberNames": [
+      "Halsin"
+    ],
+    "AllMemberIds": [
+      3,
+      4
+    ],
+    "ExceededTime": false,
+    "BoatId": 1,
+    "BookingStart": "2023-12-18T12:54:00",
+    "BookingEnd": "2023-12-19T12:53:00"
+  },
+  {
+    "Location": "Esrum S\u00F8",
+    "BookingId": 5,
+    "UserId": 3,
+    "ExtraUsersIds": [
+      1
+    ],
+    "AllMemberNames": [
+      "Astarion Acunin",
+      "Ole Hansen"
+    ],
+    "ExtraMemberNames": [
+      "Ole Hansen"
+    ],
+    "AllMemberIds": [
+      3,
+      1
+    ],
+    "ExceededTime": false,
+    "BoatId": 2,
+    "BookingStart": "2023-12-18T12:54:00",
+    "BookingEnd": "2023-12-19T12:53:00"
+  },
+  {
+    "Location": "Esrum S\u00F8",
+    "BookingId": 6,
+    "UserId": 3,
+    "ExtraUsersIds": [
+      4,
+      5
+    ],
+    "AllMemberNames": [
+      "Astarion Acunin",
+      "Halsin",
+      "Camilla Johannsen"
+    ],
+    "ExtraMemberNames": [
+      "Halsin",
+      "Camilla Johannsen"
+    ],
+    "AllMemberIds": [
+      3,
+      4,
+      5
+    ],
+    "ExceededTime": false,
+    "BoatId": 3,
+    "BookingStart": "2023-12-18T12:58:00",
+    "BookingEnd": "2023-12-21T12:57:00"
   }
 ]

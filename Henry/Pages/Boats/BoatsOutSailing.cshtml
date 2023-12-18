@@ -43,10 +43,21 @@
                         <td>
                             @if (boat.CurrentBooking.ExtraUsersIds != null)
                             {
-                                @foreach (var ExtraMemberId in boat.CurrentBooking.ExtraUsersIds)
+                                @* @foreach (var ExtraMemberId in boat.CurrentBooking.ExtraUsersIds) *@
+                                for (int i = 0; i<boat.CurrentBooking.ExtraUsersIds.Count; i++)
                                 {
-                                    <div class="popup" onclick="myFunction2(@ExtraMemberId,@boat.Id)">@memberRepo.GetMember(ExtraMemberId).Name 
-                                    <span class="popuptext" id="myPopup2@(ExtraMemberId)@(boat.Id)">@memberRepo.GetMember(ExtraMemberId).ICE </span> 
+                                    <div class="popup" onclick="myFunction2(@boat.CurrentBooking.ExtraUsersIds[i],@boat.Id)">
+                                        @{string msg;}
+                                        @if (i == boat.CurrentBooking.ExtraUsersIds.Count-1)
+                                        {
+                                            msg = memberRepo.GetMember(boat.CurrentBooking.ExtraUsersIds[i]).Name;
+                                        }
+                                        else
+                                        {
+                                            msg = $"{memberRepo.GetMember(boat.CurrentBooking.ExtraUsersIds[i]).Name}, ";
+                                        }
+                                        @msg
+                                        <span class="popuptext" id="myPopup2@(boat.CurrentBooking.ExtraUsersIds[i])@(boat.Id)">@memberRepo.GetMember(boat.CurrentBooking.ExtraUsersIds[i]).ICE </span>
                                     </div>
                                 }
                             }

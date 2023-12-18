@@ -36,7 +36,8 @@
                     {
                         //Pop-up for ICE for the member who booked the boat
                         <td>
-                            <div class="popup" onclick="myFunction(@boat.Id)">@memberRepo.GetMember(boat.CurrentBooking.UserId).Name <span class="popuptext" id="myPopup@(boat.Id)">@memberRepo.GetMember(boat.CurrentBooking.UserId).ICE </span> </div>
+                            <div class="popup" onclick="myFunction(@boat.Id)">@memberRepo.GetMember(boat.CurrentBooking.UserId).Name 
+                             <span class="popuptext" id="myPopup@(boat.Id)">@memberRepo.GetMember(boat.CurrentBooking.UserId).ICE </span> </div>
                         </td>
                         //Explicit cast. This makes a pop-up with the ICE of each "medsejlende".
                         <td>

@@ -5,6 +5,7 @@ namespace Henry.Pages.Boats
 {
     public class BoatsOutSailingModel : PageModel
     {
+   
         public void OnGet()
         {
         }

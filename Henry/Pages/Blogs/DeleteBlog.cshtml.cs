@@ -7,22 +7,32 @@ namespace Henry.Pages.Blogs
 {
     public class DeleteBlogModel : PageModel
     {
+        private IMemberRepository _memberRepo;
         private IBlogRepository _blogRepo;
         private Blog _deleteBlog;
         public Blog DeleteBlog { get { return _deleteBlog; } set { _deleteBlog = value; } }
 
-        public DeleteBlogModel(IBlogRepository blogRepository)
+        public DeleteBlogModel(IBlogRepository blogRepository, IMemberRepository memberRepo)
         {
             _blogRepo = blogRepository;
+            _memberRepo = memberRepo;
         }
 
-        public IActionResult OnGet(int deleteId)
+        public IActionResult OnGet(int id)
         {
-            DeleteBlog = _blogRepo.GetBlog(deleteId);
+            if (!_memberRepo.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
+            DeleteBlog = _blogRepo.GetBlog(id);
             return Page();
         }
         public IActionResult OnPostDelete(int number)
         {
+            if (!_memberRepo.VerifySessionAdmin(HttpContext))
+            {
+                return RedirectToPage("/LogIn/LogInNeedAdmin");
+            }
             DeleteBlog = _blogRepo.GetBlog(number);
             _blogRepo.DeleteBlog(DeleteBlog);
             return RedirectToPage("Index");

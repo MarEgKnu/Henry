@@ -1,39 +1,39 @@
 ﻿@page
+@using Henry.Interfaces
+@inject IMemberRepository memberRepo
 @model Henry.Pages.Blogs.IndexModel
 @{
+    ViewData["Title"] = "Blogs";
 }
 
-<h1>List of blogs</h1>
-
-<p>
-    <a asp-page="CreateBlog">Create a new blog</a>
-</p>
+<h1>Liste af blogs</h1>
+@if (memberRepo.VerifySessionAdmin(HttpContext))
+{
+    <p>
+        <a asp-page="CreateBlog">Opret en ny blog</a>
+    </p>
+}
 
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Content</th>
-            <th>CreatorUserId</th>
-            <th>Created</th>
-            <th>LastUpdated</th>
-            <th>Picture</th>
+            <th>Titel</th>
+            <th>Skrevet af</th>
+            <th>Oprettet</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Blogs)
         {
             <tr>
-                <td>@item.Id</td>
-                <td>@item.Title</td>
-                <td>@item.Content</td>
-                <td>@item.CreatorUserId</td>
-                <td>@item.Created</td>
-                <td>@item.LastUpdated</td>
-                <td><img src="~/Imgs/BlogImages/@item.Img" width="80" height="80" /></td>
-                <td><a asp-page="EditBlog" asp-route-id="@item.Id">Edit</a></td>
-                <td><a asp-page="DeleteBlog" asp-route-deleteId="@item.Id">Delete</a></td>
+                <td><a asp-page="ViewBlog" asp-route-id="@item.Id">@item.Title</a></td>
+                <td>@memberRepo.GetMember(item.CreatorUserId).Name</td>
+                <td>@item.Created.ToString("g")</td>
+                @if (memberRepo.VerifySessionAdmin(HttpContext))
+                {
+                    <td><a asp-page="EditBlog" asp-route-id="@item.Id">Rediger</a></td>
+                    <td><a asp-page="DeleteBlog" asp-route-id="@item.Id">Slet</a></td>
+                }
             </tr>
         }
     </tbody>

@@ -1,4 +1,23 @@
-﻿@page
+﻿@page "{id:int}"
+@using Henry.Interfaces
+@inject IMemberRepository memberRepo
 @model Henry.Pages.Blogs.ViewBlogModel
 @{
+    ViewData["Title"] = "Vis blog";
 }
+<div>
+    <h1 style="text-align: center">@Model.Blog.Title</h1>
+    @if (Model.Blog.Img != null)
+    {
+        <img src="/Imgs/BlogImages/@Model.Blog.Img" style="width: 50%; height:auto; margin-left: auto; margin-right: auto; display:block" />
+    }
+    <img src="/Imgs/MemberImages/@memberRepo.GetMember(Model.Blog.CreatorUserId).Pb" style="width: 80px; height:auto; float:right" />
+    <p style="float:right">Skrevet af @memberRepo.GetMember(Model.Blog.CreatorUserId).Name </p>
+    <p>Oprettet d. @Model.Blog.Created.ToString("g"). Sidst opdateret d. @Model.Blog.LastUpdated.ToString("g") </p>
+    <br/>
+</div>
+<div>
+    <p style="text-align: center; white-space: pre-wrap">@Model.Blog.Content</p>
+</div>
+
+<a asp-page="Index">Tilbage</a>

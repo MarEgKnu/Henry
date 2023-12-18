@@ -18,6 +18,8 @@ namespace Henry.Pages.Blogs
         public void OnGet()
         {
             Blogs = _blogRepo.GetAllBlogs();
+            // reverse the list so the newest blog entries are shown at the top
+            Blogs.Reverse();
         }
     }
 }

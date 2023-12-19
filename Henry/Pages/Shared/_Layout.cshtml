@@ -28,6 +28,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        @if (memberRepo.GetLoggedInMember(Context) != null)
+                        {
+                        <li class="nav-item">
+                           <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/ProfilePage">Profil</a>
+                        </li>
+                        }
+                        else
+                        {
+
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Boats/Index">Både</a>
                         </li>

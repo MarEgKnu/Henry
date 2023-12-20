@@ -16,6 +16,10 @@ namespace Henry.Pages.LogIn
         }
         public IActionResult OnGet()
         {
+            if (!_memberRepository.VerifySession(HttpContext))
+            {
+                return RedirectToPage("LogIn");
+            }
             if (HttpContext.Session.GetInt32("UserId") == null) 
             {
                 RedirectToPage("LogInError");

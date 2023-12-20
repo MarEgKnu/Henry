@@ -58,8 +58,9 @@
                                             msg = $"{memberRepo.GetMember(boat.CurrentBooking.ExtraUsersIds[i]).Name}, ";
                                         }
                                         @msg
-                                        <span class="popuptext" id="myPopup2@(boat.CurrentBooking.ExtraUsersIds[i])@(boat.Id)
-                                         ">@memberRepo.GetMember(boat.CurrentBooking.ExtraUsersIds[i]).ICE </span>
+                                        <span class="popuptext" id="myPopup2@(boat.CurrentBooking.ExtraUsersIds[i])@(boat.Id)">
+                                            @memberRepo.GetMember(boat.CurrentBooking.ExtraUsersIds[i]).ICE 
+                                        </span>
                                     </div>
                                 }
                             }

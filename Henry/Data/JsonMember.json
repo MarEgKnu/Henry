@@ -58,5 +58,15 @@
     "Pb": "8226893d-c83d-4fa5-8b1a-ee668d5dfbc6_giphy.gif",
     "ICE": "Tilde 524697874",
     "Memberstatus": false
+  },
+  {
+    "UserId": 7,
+    "Name": "Bob",
+    "Phone": "12345678",
+    "Email": "bob@bob.bob",
+    "Password": "bob",
+    "Pb": "4832e0cd-d6d1-4cc4-a431-538fd15fb0bf_giphy.gif",
+    "ICE": "Bobbob 32146189",
+    "Memberstatus": false
   }
 ]
